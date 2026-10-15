@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://tempuri.org" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://gj-cnx-axaos:8101/DynamicsAx/Services/GJTHPnGenCastService?xsd=xsd3" namespace="http://tempuri.org" />
+      <xsd:import schemaLocation="http://gj-cnx-axaos:8101/DynamicsAx/Services/GJTHPnGenCastService?xsd=xsd4" namespace="http://schemas.microsoft.com/dynamics/2010/01/datacontracts" />
+      <xsd:import schemaLocation="http://gj-cnx-axaos:8101/DynamicsAx/Services/GJTHPnGenCastService?xsd=xsd6" namespace="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault" />
+      <xsd:import schemaLocation="http://gj-cnx-axaos:8101/DynamicsAx/Services/GJTHPnGenCastService?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://gj-cnx-axaos:8101/DynamicsAx/Services/GJTHPnGenCastService?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/Dynamics.Ax.Application" />
+      <xsd:import schemaLocation="http://gj-cnx-axaos:8101/DynamicsAx/Services/GJTHPnGenCastService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.Ax.Xpp" />
+      <xsd:import schemaLocation="http://gj-cnx-axaos:8101/DynamicsAx/Services/GJTHPnGenCastService?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://gj-cnx-axaos:8101/DynamicsAx/Services/GJTHPnGenCastService?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/Microsoft.Dynamics.AX.Framework.Services" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="GJTH_CastingLotTransServiceCastLotTransRequest">
+    <wsdl:part name="parameters" element="tns:GJTH_CastingLotTransServiceCastLotTransRequest" />
+  </wsdl:message>
+  <wsdl:message name="GJTH_CastingLotTransServiceCastLotTransRequest_Headers">
+    <wsdl:part xmlns:q1="http://schemas.microsoft.com/dynamics/2010/01/datacontracts" name="context" element="q1:CallContext" />
+  </wsdl:message>
+  <wsdl:message name="GJTH_CastingLotTransServiceCastLotTransResponse">
+    <wsdl:part name="parameters" element="tns:GJTH_CastingLotTransServiceCastLotTransResponse" />
+  </wsdl:message>
+  <wsdl:message name="GJTH_CastingLotTransService_CastLotTrans_AifFaultFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault" name="detail" element="q2:AifFault" />
+  </wsdl:message>
+  <wsdl:message name="GJTH_PnGenCastServiceGenCastLotRequest">
+    <wsdl:part name="parameters" element="tns:GJTH_PnGenCastServiceGenCastLotRequest" />
+  </wsdl:message>
+  <wsdl:message name="GJTH_PnGenCastServiceGenCastLotRequest_Headers">
+    <wsdl:part xmlns:q3="http://schemas.microsoft.com/dynamics/2010/01/datacontracts" name="context" element="q3:CallContext" />
+  </wsdl:message>
+  <wsdl:message name="GJTH_PnGenCastServiceGenCastLotResponse">
+    <wsdl:part name="parameters" element="tns:GJTH_PnGenCastServiceGenCastLotResponse" />
+  </wsdl:message>
+  <wsdl:message name="GJTH_PnGenCastService_GenCastLot_AifFaultFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.microsoft.com/dynamics/2008/01/documents/Fault" name="detail" element="q4:AifFault" />
+  </wsdl:message>
+  <wsdl:portType name="GJTH_CastingLotTransService">
+    <wsdl:operation name="CastLotTrans">
+      <wsdl:input wsaw:Action="http://tempuri.org/GJTH_CastingLotTransService/CastLotTrans" name="GJTH_CastingLotTransServiceCastLotTransRequest" message="tns:GJTH_CastingLotTransServiceCastLotTransRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/GJTH_CastingLotTransService/CastLotTransResponse" name="GJTH_CastingLotTransServiceCastLotTransResponse" message="tns:GJTH_CastingLotTransServiceCastLotTransResponse" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/GJTH_CastingLotTransService/CastLotTransAifFaultFault" name="AifFaultFault" message="tns:GJTH_CastingLotTransService_CastLotTrans_AifFaultFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="GJTH_PnGenCastService">
+    <wsdl:operation name="GenCastLot">
+      <wsdl:input wsaw:Action="http://tempuri.org/GJTH_PnGenCastService/GenCastLot" name="GJTH_PnGenCastServiceGenCastLotRequest" message="tns:GJTH_PnGenCastServiceGenCastLotRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/GJTH_PnGenCastService/GenCastLotResponse" name="GJTH_PnGenCastServiceGenCastLotResponse" message="tns:GJTH_PnGenCastServiceGenCastLotResponse" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/GJTH_PnGenCastService/GenCastLotAifFaultFault" name="AifFaultFault" message="tns:GJTH_PnGenCastService_GenCastLot_AifFaultFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

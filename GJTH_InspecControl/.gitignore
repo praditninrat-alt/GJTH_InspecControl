@@ -1,0 +1,17 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+
+# Build files
+bin/
+obj/
+
+# Packages
+packages/
+
+# Publish
+PublishProfiles/
+
+# Logs
+*.log

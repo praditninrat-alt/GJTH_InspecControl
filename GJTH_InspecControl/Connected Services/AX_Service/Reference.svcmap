@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ae61142a-5a00-40cc-aef8-08ccc92dc96b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://GJ-CNX-AXAOS:8101/DynamicsAx/Services/SZNPnServiceGroup" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="SZNPnServiceGroup8.xsd" MetadataType="Schema" ID="5d61b400-45ca-4083-8836-433e252354f2" SourceId="1" SourceUrl="http://gj-cnx-axaos:8101/DynamicsAx/Services/SZNPnServiceGroup?xsd=xsd6" />
+    <MetadataFile FileName="SZNPnServiceGroup81.xsd" MetadataType="Schema" ID="31cdce64-0f68-420e-b631-5f51293d5301" SourceId="1" SourceUrl="http://gj-cnx-axaos:8101/DynamicsAx/Services/SZNPnServiceGroup?xsd=xsd7" />
+    <MetadataFile FileName="SZNPnServiceGroup82.xsd" MetadataType="Schema" ID="bc1eca2b-28e2-40fe-8978-a884c00a44c0" SourceId="1" SourceUrl="http://gj-cnx-axaos:8101/DynamicsAx/Services/SZNPnServiceGroup?xsd=xsd5" />
+    <MetadataFile FileName="SZNPnServiceGroup83.xsd" MetadataType="Schema" ID="11b19605-cf17-4cde-a384-e34dacea0ee9" SourceId="1" SourceUrl="http://gj-cnx-axaos:8101/DynamicsAx/Services/SZNPnServiceGroup?xsd=xsd3" />
+    <MetadataFile FileName="SZNPnServiceGroup84.xsd" MetadataType="Schema" ID="98613949-03cc-400e-b845-7e964b7944ec" SourceId="1" SourceUrl="http://gj-cnx-axaos:8101/DynamicsAx/Services/SZNPnServiceGroup?xsd=xsd4" />
+    <MetadataFile FileName="SZNPnServiceGroup85.xsd" MetadataType="Schema" ID="3c46d8a5-2c6a-477e-b7b5-199d8d146e79" SourceId="1" SourceUrl="http://gj-cnx-axaos:8101/DynamicsAx/Services/SZNPnServiceGroup?xsd=xsd2" />
+    <MetadataFile FileName="SZNPnServiceGroup2.wsdl" MetadataType="Wsdl" ID="51ae4016-6894-4d20-91fd-cdd16ea741ff" SourceId="1" SourceUrl="http://gj-cnx-axaos:8101/DynamicsAx/Services/SZNPnServiceGroup?wsdl=wsdl0" />
+    <MetadataFile FileName="SZNPnServiceGroup21.wsdl" MetadataType="Wsdl" ID="3573cc17-a65f-49d3-8d38-f9f7a8ad23fa" SourceId="1" SourceUrl="http://gj-cnx-axaos:8101/DynamicsAx/Services/SZNPnServiceGroup" />
+    <MetadataFile FileName="SZNPnServiceGroup86.xsd" MetadataType="Schema" ID="8c4313d9-8432-41da-9ddd-9120faff45b7" SourceId="1" SourceUrl="http://gj-cnx-axaos:8101/DynamicsAx/Services/SZNPnServiceGroup?xsd=xsd0" />
+    <MetadataFile FileName="SZNPnServiceGroup87.xsd" MetadataType="Schema" ID="52805c02-28ff-4281-9ea7-eef11a750d2d" SourceId="1" SourceUrl="http://gj-cnx-axaos:8101/DynamicsAx/Services/SZNPnServiceGroup?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

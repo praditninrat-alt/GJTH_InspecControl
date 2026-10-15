@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="0caf985b-da7c-469a-bb86-969e785c2701" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://GJ-CNX-AXAOS:8101/DynamicsAx/Services/GJTHPnGenCastService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="GJTHPnGenCastService8.xsd" MetadataType="Schema" ID="41655cbf-54e1-499b-a3ab-b2eb87ddd0c4" SourceId="1" SourceUrl="http://gj-cnx-axaos:8101/DynamicsAx/Services/GJTHPnGenCastService?xsd=xsd4" />
+    <MetadataFile FileName="GJTHPnGenCastService81.xsd" MetadataType="Schema" ID="37fcb455-385c-4f50-ad5b-4c5491430aa7" SourceId="1" SourceUrl="http://gj-cnx-axaos:8101/DynamicsAx/Services/GJTHPnGenCastService?xsd=xsd5" />
+    <MetadataFile FileName="GJTHPnGenCastService82.xsd" MetadataType="Schema" ID="c5efa2a5-2291-4ede-b0a0-71e820ccff7f" SourceId="1" SourceUrl="http://gj-cnx-axaos:8101/DynamicsAx/Services/GJTHPnGenCastService?xsd=xsd6" />
+    <MetadataFile FileName="GJTHPnGenCastService83.xsd" MetadataType="Schema" ID="e4de2003-a5ac-4c52-a2f3-d4c5af3d41b0" SourceId="1" SourceUrl="http://gj-cnx-axaos:8101/DynamicsAx/Services/GJTHPnGenCastService?xsd=xsd7" />
+    <MetadataFile FileName="GJTHPnGenCastService84.xsd" MetadataType="Schema" ID="6426fcd7-b968-4e54-b99e-8a25d44962bd" SourceId="1" SourceUrl="http://gj-cnx-axaos:8101/DynamicsAx/Services/GJTHPnGenCastService?xsd=xsd0" />
+    <MetadataFile FileName="GJTHPnGenCastService85.xsd" MetadataType="Schema" ID="ad04081f-fdd1-418a-9270-382eb1edacc7" SourceId="1" SourceUrl="http://gj-cnx-axaos:8101/DynamicsAx/Services/GJTHPnGenCastService?xsd=xsd1" />
+    <MetadataFile FileName="GJTHPnGenCastService86.xsd" MetadataType="Schema" ID="c3e8ac2e-38ad-4210-b5d2-42ac602770c4" SourceId="1" SourceUrl="http://gj-cnx-axaos:8101/DynamicsAx/Services/GJTHPnGenCastService?xsd=xsd2" />
+    <MetadataFile FileName="GJTHPnGenCastService87.xsd" MetadataType="Schema" ID="d6b92492-f153-4e08-96cd-e432af4af811" SourceId="1" SourceUrl="http://gj-cnx-axaos:8101/DynamicsAx/Services/GJTHPnGenCastService?xsd=xsd3" />
+    <MetadataFile FileName="GJTHPnGenCastService2.wsdl" MetadataType="Wsdl" ID="64bbfe2d-2424-4b54-97fd-907efe782da3" SourceId="1" SourceUrl="http://gj-cnx-axaos:8101/DynamicsAx/Services/GJTHPnGenCastService?wsdl=wsdl0" />
+    <MetadataFile FileName="GJTHPnGenCastService21.wsdl" MetadataType="Wsdl" ID="edd29bb4-17cb-4e60-927a-f685f119d4a2" SourceId="1" SourceUrl="http://gj-cnx-axaos:8101/DynamicsAx/Services/GJTHPnGenCastService" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
