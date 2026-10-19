@@ -545,6 +545,11 @@ namespace GJTH_ISPC
 
                     dtTemp.AcceptChanges();
 
+                    // Re-Number
+                    for (int i = 0; i < dtTemp.Rows.Count; i++)
+                    {
+                        dtTemp.Rows[i]["RowSeq"] = i + 1;
+                    }
                     GridView1.DataSource = dtTemp;
                     GridView1.DataBind();
                     ShowModalDialog("Success", "Delete Completed", "OK", true);
