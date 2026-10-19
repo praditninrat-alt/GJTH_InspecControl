@@ -2,16 +2,29 @@
 .vs/
 *.suo
 *.user
+*.cache
 
-# Build files
-bin/
-obj/
+# Build
+[Bb]in/
+[Oo]bj/
 
-# Packages
+# IIS Express
+/.vs/config/
+
+# NuGet
 packages/
+!packages/build/
 
 # Publish
 PublishProfiles/
 
 # Logs
 *.log
+
+# Resharper
+_ReSharper*/
+*.DotSettings.user
+
+# SQL LocalDB
+*.mdf
+*.ldf
