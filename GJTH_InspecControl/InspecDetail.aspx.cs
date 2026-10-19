@@ -523,7 +523,7 @@ namespace GJTH_ISPC
         {
             try
             {
-                /***--เพิ่มโต้ดในส่วนของการลบข้อมูล ราย ItemID---01/02/2026-***/
+                /***--เพิ่มโต้ดในส่วนของการลบข้อมูล ราย ItemID---01/10/2026-***/
                 DataRow[] drr = dtTemp.Select("RowSeq=" + Convert.ToInt32(HdeleteId.Value));
 
                 if (drr.Length > 0)
