@@ -83,6 +83,7 @@ namespace GJTH_ISPC
             }
             else
             {
+                //*** เพิ่มเงื่อนไขจังหวะ ค้นหาข้อมูลที่ไม่มีใน List รายการ **//
                 GridView1.DataSource = null;
                 GridView1.DataBind();
 
@@ -238,7 +239,7 @@ namespace GJTH_ISPC
                 //    return;
                 //}
 
-                /***----ปรับแก้ไข โค้ดเพิ่มเติ่ม ในการลบ ข้อมูลหน้า InspecList--02/02/2026---**/
+                /***----ปรับแก้ไข โค้ดเพิ่มเติ่ม ในการลบ ข้อมูลหน้า InspecList--02/10/2026---**/
                 string strSql = "delete from ISPC_ItemInspect where IsActive=1  and  PO='" + HPO.Value+ "' and  MemoID='" + HdeleteId.Value+ "'";
                 db.ExecuteDBExt(strSql);
 

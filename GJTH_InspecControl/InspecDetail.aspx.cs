@@ -440,7 +440,7 @@ namespace GJTH_ISPC
                 //    lblAxStartDate.Text = Convert.ToDateTime(rowView["SCHEDSTART"]).ToString("dd/MM/yyyy");
                 //}
 
-                /***** สร้าง Field --- ReturnQTY --- 01/02/2026 ****/
+                /***** สร้าง Field --- ReturnQTY --- 01/10/2026 ****/
                 TextBox txtReturnQTY = e.Row.FindControl("txtReturnQTY") as TextBox;
                 if (rowView["ReturnQTY"].ToString() != "")
                 {
@@ -722,7 +722,7 @@ namespace GJTH_ISPC
                         strsql += " Reason='" + txtReason.Text + "',";
                         strsql += " ShelfNo='" + txtShelfNo.Text + "',";
                         strsql += " ReturnQTY=" + dReturnQTY + ",";
-                        /** เพิ่ม Field ModifyDate ที่ DataBase-- 01/02/2026 --**/
+                        /** เพิ่ม Field ModifyDate ที่ DataBase-- 01/10/2026 --**/
                         strsql += " QTYRecv=" + dRec + ",";
                         strsql += " QTYGood=" + dGood + ",";
                         strsql += " QTYScrap=" + dScrap + ",";
@@ -875,7 +875,7 @@ namespace GJTH_ISPC
 
             }
 
-            /** ปิด เอาไว้เพราะว่าไม่ได้ใช้งาน 01/02/2026 ***/
+            /** ปิด เอาไว้เพราะว่าไม่ได้ใช้งาน 01/10/2026 ***/
             //else if (rdoSheetTube.Checked)
             //{
             //    lblInvSearch.Visible = false;

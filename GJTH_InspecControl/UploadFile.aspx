@@ -3,12 +3,6 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
-    <script type="text/javascript" src="bootstrap/js/bootstrap-filestyle.min.js">
-
-      $(":file").filestyle({ input: false });
-
-    </script>
-
     <script type="text/javascript">
 
 
@@ -101,17 +95,6 @@
         /*.cssPager .current { color:Red; text-decoration: none;}*/
         /*.cssPager { color: #885454; text-decoration: none; background-color:#F7F7DE;}*/
     </style>
-
-    <%-- <div class="row" style="margin-top: 5px;">
-        <div class="col-lg-4 text-left">
-            <div style="display: none;">
-                <asp:Button ID="btnNewwindow" runat="server" Text="Button" />
-            </div>
-            <asp:FileUpload ID="FileUpload1" runat="server" CssClass="filestyle" data-buttonName="btn-primary" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
-
-            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="FileUpload1" ErrorMessage="Error : Only .xls,xlsx" ValidationExpression="([a-zA-Z0-9()\'\s_\\.\-:])+(.xls|.xlsx)$" CssClass="text-danger" runat="server" />
-        </div>
-    </div>--%>
 
     <div class="row" style="margin-top: 20px;">
         <div class="col-lg-12 text-center">

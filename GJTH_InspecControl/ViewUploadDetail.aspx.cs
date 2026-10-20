@@ -29,7 +29,6 @@ namespace GJTH_ISPC
 
             fileUpload = System.Web.HttpUtility.UrlDecode(Request.QueryString["fileUpload"]);
 
-            //Label1.Text = "File : " + fileUpload;
 
             btnConfirm.Click += new EventHandler(btnConfirm_Click);
 
@@ -48,11 +47,12 @@ namespace GJTH_ISPC
                 string PO = "";
                 string ItemID = "";
 
-                PO =  Server.HtmlDecode(grvData.Rows[0].Cells[0].Text).Replace("\u00A0", "").Trim();
+                PO = Server.HtmlDecode(grvData.Rows[0].Cells[0].Text).Replace("\u00A0", "").Trim();
                 string MemoID = Server.HtmlDecode(grvData.Rows[0].Cells[2].Text)
                    .Replace("\u00A0", "")
                    .Trim();
 
+                //** เช็คเงื่อนไข ต่างๆ ก่อนทำการ Insert into Data**//
                 if (string.IsNullOrWhiteSpace(PO) || string.IsNullOrWhiteSpace(MemoID))
                 {
                     ShowModalDialog(
@@ -87,9 +87,9 @@ namespace GJTH_ISPC
 
                 foreach (GridViewRow gr in grvData.Rows)
                 {
-                     PO = Server.HtmlDecode(gr.Cells[0].Text).Replace("\u00A0", "").Trim();
+                    PO = Server.HtmlDecode(gr.Cells[0].Text).Replace("\u00A0", "").Trim();
 
-                     ItemID = Server.HtmlDecode(gr.Cells[1].Text) .Replace("\u00A0", "").Trim();
+                    ItemID = Server.HtmlDecode(gr.Cells[1].Text).Replace("\u00A0", "").Trim();
 
                     string sqlP = @"
                         SELECT TOP 1 PURCHID, ITEMID, LINENUMBER,NAME
@@ -149,9 +149,6 @@ namespace GJTH_ISPC
                                 case 1:
                                     ItemID = gr.Cells[j].Text;
                                     break;
-                                //case 2:
-                                //    ItemName = gr.Cells[j].Text;
-                                //    break;
                                 case 2:
                                     MemoID = gr.Cells[j].Text;
                                     break;
@@ -394,8 +391,6 @@ namespace GJTH_ISPC
             for (var rowNumber = 2; rowNumber <= workSheet.Dimension.End.Row; rowNumber++)
             {
                 var row = workSheet.Cells[rowNumber, 1, rowNumber, workSheet.Dimension.End.Column];
-
-                //var curLoad = System.DateTime.Now;
 
                 var newRow = table.NewRow();
 
