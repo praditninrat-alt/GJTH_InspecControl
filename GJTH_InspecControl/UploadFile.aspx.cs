@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -31,6 +32,10 @@ namespace GJTH_ISPC
 
             }
         }
+        protected void rdoChange(object sender, EventArgs e)
+        {
+            
+        }
         public void ShowModalDialog(string strHeader, string strDetail, string strButton, bool bIsWaring)
         {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
@@ -62,14 +67,59 @@ namespace GJTH_ISPC
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ModalScript", sb.ToString(), false);
 
         }
+
+        
+
         private void btnNewwindow_Click(object sender, EventArgs e)
         {
+            if (!ValidateTemplate())
+            {
+                ScriptManager.RegisterStartupScript(
+                 this,
+                 this.GetType(),
+                 "alert",
+                 "alert('The uploaded file does not match the selected template.');",
+                 true);
+
+                return;
+            }
+
+
             string strUserName = System.Web.HttpContext.Current.Request.LogonUserIdentity.Name.Split('\\')[1];
+
             FileUpload1.SaveAs(Server.MapPath("~/App_Data/tempfile-" + strUserName + ".xlsx"));
-            string url = "~/ViewUploadDetail.aspx?fileUpload=" + System.Web.HttpUtility.UrlEncode(Fupload);
+
+            string templateType = rdoDiamond.Checked ? "DIAMOND" : "STONE";
+
+            string url = "~/ViewUploadDetail.aspx?fileUpload="
+                        + System.Web.HttpUtility.UrlEncode(Fupload)
+                        + "&templateType="
+                        + templateType;
+
             Response.Redirect(url);
 
 
         }
+        private bool ValidateTemplate()
+        {
+            using (var package = new ExcelPackage(FileUpload1.PostedFile.InputStream))
+            {
+                var ws = package.Workbook.Worksheets.First();
+                int totalColumn = ws.Dimension.End.Column;
+
+                if (rdoDiamond.Checked)
+                {
+                    return totalColumn >= 23;
+                }
+
+                if (rdoStone.Checked)
+                {
+                    return totalColumn >= 12;
+                }
+            }
+
+            return false;
+        }
+
     }
 }

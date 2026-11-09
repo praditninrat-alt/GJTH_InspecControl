@@ -165,6 +165,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="imgs\home2.png" />
     <Content Include="RedirectPrint.aspx" />
     <Content Include="imgs\Cancel.png" />
     <Content Include="imgs\CancelDis.png" />
@@ -212,7 +213,6 @@
     <Content Include="imgs\padlock79.png" />
     <Content Include="imgs\Print.ico" />
     <Content Include="imgs\qc.png" />
-    <Content Include="imgs\real-estate.png" />
     <Content Include="imgs\receive-w.png" />
     <Content Include="imgs\receive.png" />
     <Content Include="imgs\repair.png" />

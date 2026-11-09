@@ -6,12 +6,12 @@
 
     <script type="text/javascript">
 
-        function DeleteTrans(id, po) {
+        function DeleteTrans(id) {
 
             $("#deletransferid").text(id);
 
             $("#<%= HdeleteId.ClientID %>").val(id);
-            $("#<%= HPO.ClientID %>").val(po);
+            //$("#<%= HPO.ClientID %>").val(po);
 
             $("#mddelete").modal("show");
 
@@ -120,7 +120,14 @@
                 transform: translateY(0px);
             }
     </style>
-    <div class="row" style="margin-top: 10px; margin-left: 5px;">
+
+
+     <div class="row">
+        <div class="col-lg-2 col-md-2  col-sm-2 text-left">
+        </div>
+
+        <div class="col-lg-8 col-md-8  col-sm-8 text-right">
+            <div class="row" style="margin-top: 10px; margin-left: 5px;">
 
         <div class="col-lg-2 col-md-2  col-sm-2 text-right">
             <asp:Label ID="Label5" runat="server" Text="PO :"></asp:Label>
@@ -130,7 +137,7 @@
             <asp:TextBox ID="txtPO" CssClass="form-control" runat="server" autocomplete="off"></asp:TextBox>
         </div>
         <div class="col-lg-2 col-md-2  col-sm-2 text-right">
-            <asp:Label ID="Label3" runat="server" Text="MemoID :"></asp:Label>
+            <asp:Label ID="Label3" runat="server" Text="MemoID/Invoice :"></asp:Label>
         </div>
 
         <div class="col-lg-2 text-left">
@@ -145,29 +152,40 @@
         </div>
 
     </div>
+        </div>
+         <div class="col-lg-2 col-md-2  col-sm-2 text-left">
+        </div>
+
+    </div>
+
+   
 
     <hr style="border: 0px; border-bottom: 1px solid #000;" />
     <div style="text-align: center; margin-top: 20px;">
         <asp:Label ID="lblMessage" runat="server" ForeColor="#dc3545" Font-Bold="true" Font-Size="Large"> </asp:Label>
     </div>
     <div class="row">
-        <div class="col-lg-6 col-md-6  col-sm-6 text-left">
+        <div class="col-lg-2 col-md-2  col-sm-2 text-left">
         </div>
 
-        <div class="col-lg-6 col-md-6  col-sm-6 text-right">
+        <div class="col-lg-8 col-md-8  col-sm-8 text-right">
             <asp:Button ID="btnNew" runat="server" Text="➕ New Invoice/Memo" CssClass="btn btn-success" OnClick="btnNew_Click" Width="200px" />
             <%--<asp:Button ID="btnUp" runat="server" Text="UploadFile" CssClass="btn btn-success" OnClick="btnUp_Click" Width="200px" />--%>
 
             <asp:Button ID="btnUp" runat="server" Text="📤 Upload Excel File" CssClass="btn btn-primary" OnClick="btnUp_Click" Width="200px" Height="33px" />
 
         </div>
-
+         <div class="col-lg-2 col-md-2  col-sm-2 text-left">
+        </div>
 
     </div>
 
     <div class="row" style="margin-top: 10px; margin-left: 10px;">
 
-        <asp:GridView CssClass="table table-striped table-hover table-bordered"
+         <div class="col-lg-2 col-md-2  col-sm-2 text-center">
+        </div>
+         <div class="col-lg-8 col-md-8  col-sm-8 text-center">
+               <asp:GridView CssClass="table table-striped table-hover table-bordered"
             ID="GridView1"
             runat="server"
             AutoGenerateColumns="False"
@@ -180,13 +198,13 @@
             <PagerSettings PageButtonCount="10" FirstPageText="First" LastPageText="Last" Mode="NumericFirstLast" />
             <Columns>
 
-                <asp:TemplateField HeaderText="PO" ItemStyle-HorizontalAlign="Center">
+                <asp:TemplateField HeaderText="PO" ItemStyle-HorizontalAlign="Center"  Visible="false">
                     <ItemTemplate>
                         <asp:Label ID="lblPO" runat="server"></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Invoice" ItemStyle-HorizontalAlign="Center">
+                <asp:TemplateField HeaderText="MemoID/Invoice" ItemStyle-HorizontalAlign="Center">
                     <ItemTemplate>
                         <asp:Label ID="lblInvoice" runat="server"></asp:Label>
                     </ItemTemplate>
@@ -199,7 +217,7 @@
                 </asp:TemplateField>
 
 
-                <asp:TemplateField HeaderText="Edit" ItemStyle-HorizontalAlign="Center">
+                <asp:TemplateField HeaderText="Edit" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="200px">
                     <ItemTemplate>
                         <asp:ImageButton ID="LnkEdit" runat="server" OnClick="LnkEdit_Click" ImageUrl="~/imgs/Edit.png"></asp:ImageButton>
 
@@ -207,10 +225,10 @@
                     </ItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Delete" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
+                <asp:TemplateField HeaderText="Delete" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="200px">
                     <ItemTemplate>
                         <div style="padding: 5px 0 0 0;">
-                            <a class="edlink" href="javascript:void(0)" onclick="DeleteTrans('<%# Eval("MemoID") %>','<%# Eval("PO") %>')" title="Delete">
+                            <a class="edlink" href="javascript:void(0)" onclick="DeleteTrans('<%# Eval("MemoID") %>')" title="Delete">
                                 <asp:Image ID="imgDel" runat="server" ImageUrl="~/imgs/Cancel.png" />
                             </a>
                             <asp:Image ID="imgDelDis" runat="server" ImageUrl="~/imgs/CancelDis.png" Visible="false" />
@@ -220,6 +238,11 @@
             </Columns>
 
         </asp:GridView>
+        </div>
+         <div class="col-lg-2 col-md-2  col-sm-2 text-center">
+        </div>
+
+      
 
     </div>
 

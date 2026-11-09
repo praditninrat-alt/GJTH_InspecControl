@@ -114,15 +114,19 @@
                         ErrorMessage="Only .xls, .xlsx files are allowed"
                         ValidationExpression="([a-zA-Z0-9()'\s_\\.\-:])+(.xls|.xlsx)$"
                         CssClass="text-danger">
-                </asp:RegularExpressionValidator>
+                    </asp:RegularExpressionValidator>
+                    <div>
+                    </div>
+                    <asp:RadioButton ID="rdoDiamond" runat="server" Text="Diamond" TextAlign="Right" GroupName="rdochk" Checked="true" OnCheckedChanged="rdoChange" AutoPostBack="true" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:RadioButton ID="rdoStone" runat="server" Text="Stone" TextAlign="Right" GroupName="rdochk" OnCheckedChanged="rdoChange" AutoPostBack="true" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
-
             </div>
 
             <div style="display: none;">
                 <asp:Button ID="btnNewwindow" runat="server" Text="Button" />
             </div>
-
         </div>
     </div>
+   
+
 </asp:Content>

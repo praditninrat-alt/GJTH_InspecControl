@@ -30,7 +30,7 @@ namespace GJTH_ISPC
                 txtInvData.Visible = false;
                 //db.ExecuteDBExt("Delete from PLT_PlatingDescTmp where CreateBy='"+ strUserId + "'");
 
-                if (Session["PO"].ToString() != "")
+                if (Session["Invoice"].ToString() != "")
                 {
                     txtInvSearch.Text = Session["Invoice"].ToString();
                     txtInvData.Text = Session["Invoice"].ToString();
@@ -147,6 +147,13 @@ namespace GJTH_ISPC
                 strsql += " and pt.purchID = '" + txtPO.Text + "'";
             }
 
+
+
+            if (txtInvData.Text.Trim() != "")
+            {
+                strsql += " and ins.MemoID = '" + txtInvData.Text + "'";
+            }
+
             //if (txtInvSearch.Text.Trim() != "")
             //{
             //    //strsql += " and pl.CUSTOMERREF = '" + txtInvSearch.Text + "' and vj.PURCHORDERDOCNUM like  ('%-1')";
@@ -235,7 +242,7 @@ namespace GJTH_ISPC
                         and ins.po = pt.PURCHID 
                         and ins.PurchLineNo = pl.LINENUMBER
                         left outer join _V_ItemDesc vw on vw.ITEMID = pl.ITEMID
-                       where ins.po = '" + txtPO.Text + "' and ins.MemoID='" + txtInvData.Text + "'";
+                       where  ins.MemoID='" + txtInvData.Text + "'";
             strsql += " Order by pl.LINENUMBER ";
 
             DataTable dtData = db.QueryToDataTable(strsql);
@@ -285,7 +292,7 @@ namespace GJTH_ISPC
                             break;
                         case 2:
                             //rdoSheetTube.Checked = true;
-                            rdoStone.Checked = false;
+                            rdoStone.Checked = true;
                             rdoDiamond.Checked = false;
                             lblInvData.Visible = true;
                             txtInvData.Visible = true;

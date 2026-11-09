@@ -56,7 +56,7 @@ namespace GJTH_ISPC
         public void BindData()
         {
 
-            string strsql = @"select distinct PO,MemoID,FORMAT(CreateDate, 'yyyy/MM/dd') CreateDate from ISPC_ItemInspect Where IsActive=1 ";
+            string strsql = @"select distinct MemoID,FORMAT(CreateDate, 'yyyy/MM/dd') CreateDate from [AX-EXT].dbo.ISPC_ItemInspect Where IsActive=1 ";
 
             if (txtMemoID.Text.Trim() != "")
             {
@@ -68,7 +68,8 @@ namespace GJTH_ISPC
                 strsql += " and PO like  '%" + txtPO.Text + "%'";
             }
 
-            strsql += " order by CreateDate DESC ";
+            strsql += " GROUP BY MemoID,CreateDate ";
+            strsql += " Order by CreateDate DESC ";
 
             DataSet ds = db.QueryToDataSetExt(strsql);
             string po = txtPO.Text.Trim();
@@ -117,7 +118,7 @@ namespace GJTH_ISPC
 
 
                 Label lblPO = e.Row.FindControl("lblPO") as Label;
-                lblPO.Text = rowView["PO"].ToString();
+               // lblPO.Text = rowView["PO"].ToString();
 
 
                 Label lblCreateDate = e.Row.FindControl("lblCreateDate") as Label;
@@ -240,7 +241,7 @@ namespace GJTH_ISPC
                 //}
 
                 /***----ปรับแก้ไข โค้ดเพิ่มเติ่ม ในการลบ ข้อมูลหน้า InspecList--02/10/2026---**/
-                string strSql = "delete from ISPC_ItemInspect where IsActive=1  and  PO='" + HPO.Value+ "' and  MemoID='" + HdeleteId.Value+ "'";
+                string strSql = "delete from ISPC_ItemInspect where IsActive=1  and  MemoID='" + HdeleteId.Value+ "'";
                 db.ExecuteDBExt(strSql);
 
                 ShowModalDialog("Success", "Delete Completed", "OK", false);

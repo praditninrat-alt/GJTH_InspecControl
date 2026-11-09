@@ -145,15 +145,19 @@
                 HeaderStyle-BackColor="#99CCFF" 
                 CssClass="table table-hover table-striped" 
                 GridLines="None" CellPadding="4" ForeColor="#333333" > --%>
+       <%-- <asp:HiddenField ID="hdTemplateType" runat="server" />--%>
+
+
+
         <asp:GridView CssClass="table table-striped table-hover table-bordered"
             ID="grvData"
             runat="server"
-            AutoGenerateColumns="False"
+            AutoGenerateColumns="True"
             PageSize="20">
 
             <AlternatingRowStyle BackColor="White" />
 
-            <Columns>
+           <%-- <Columns>
                 <asp:BoundField HeaderText="PO" DataField="PO" />
                 <asp:BoundField HeaderText="ItemID" DataField="ItemID" />
                 <asp:BoundField HeaderText="MemoID" DataField="MemoID" />
@@ -179,7 +183,7 @@
                 <asp:BoundField HeaderText="ShelfNo" DataField="ShelfNo" />
                 <asp:BoundField HeaderText="InspecType" DataField="InspecType" />
 
-            </Columns>
+            </Columns>--%>
         </asp:GridView>
 
     </div>

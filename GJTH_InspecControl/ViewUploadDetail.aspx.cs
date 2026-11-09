@@ -17,6 +17,7 @@ namespace GJTH_ISPC
     public partial class ViewUploadDetail : System.Web.UI.Page
     {
         string fileUpload;
+        string templateType;
         ConnectionDB db = new ConnectionDB();
         string strUserId = System.Web.HttpContext.Current.Request.LogonUserIdentity.Name.Split('\\')[1];
         protected void Page_Load(object sender, EventArgs e)
@@ -28,7 +29,7 @@ namespace GJTH_ISPC
             }
 
             fileUpload = System.Web.HttpUtility.UrlDecode(Request.QueryString["fileUpload"]);
-
+            templateType = Request.QueryString["templateType"];
 
             btnConfirm.Click += new EventHandler(btnConfirm_Click);
 
@@ -41,14 +42,28 @@ namespace GJTH_ISPC
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
+            if (templateType == "STONE")
+            {
+                SaveStoneData();
+                return;
+            }
+
+            SaveDiamondData();
+
+
+        }
+        private void SaveDiamondData()
+        {
             try
             {
                 string strsql = "";
                 string PO = "";
                 string ItemID = "";
 
-                PO = Server.HtmlDecode(grvData.Rows[0].Cells[0].Text).Replace("\u00A0", "").Trim();
-                string MemoID = Server.HtmlDecode(grvData.Rows[0].Cells[2].Text)
+
+
+                PO = Server.HtmlDecode(grvData.Rows[0].Cells[1].Text).Replace("\u00A0", "").Trim();
+                string MemoID = Server.HtmlDecode(grvData.Rows[0].Cells[3].Text)
                    .Replace("\u00A0", "")
                    .Trim();
 
@@ -87,9 +102,9 @@ namespace GJTH_ISPC
 
                 foreach (GridViewRow gr in grvData.Rows)
                 {
-                    PO = Server.HtmlDecode(gr.Cells[0].Text).Replace("\u00A0", "").Trim();
+                    PO = Server.HtmlDecode(gr.Cells[1].Text).Replace("\u00A0", "").Trim();
 
-                    ItemID = Server.HtmlDecode(gr.Cells[1].Text).Replace("\u00A0", "").Trim();
+                    ItemID = Server.HtmlDecode(gr.Cells[2].Text).Replace("\u00A0", "").Trim();
 
                     string sqlP = @"
                         SELECT TOP 1 PURCHID, ITEMID, LINENUMBER,NAME
@@ -131,9 +146,9 @@ namespace GJTH_ISPC
                     var Remark = "";
                     var Reason = "";
                     var ShelfNo = "";
-                    var InspecType = "";
+                    var InspecType = "0";
                     var CreateDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                    for (int j = 0; j < grvData.Columns.Count; j++)
+                    for (int j = 0; j < gr.Cells.Count; j++)
                     {
                         if (gr.Cells[j].Text != "&nbsp;")
                         {
@@ -143,78 +158,76 @@ namespace GJTH_ISPC
                             {
 
 
-                                case 0:
+                                case 1:
                                     PO = gr.Cells[j].Text;
                                     break;
-                                case 1:
+                                case 2:
                                     ItemID = gr.Cells[j].Text;
                                     break;
-                                case 2:
+                                case 3:
                                     MemoID = gr.Cells[j].Text;
                                     break;
-                                case 3:
+                                case 4:
                                     QTYRecv = gr.Cells[j].Text;
                                     break;
-                                case 4:
+                                case 5:
                                     QTYGood = gr.Cells[j].Text;
                                     break;
-                                case 5:
+                                case 6:
                                     QTYScrap = gr.Cells[j].Text;
                                     break;
-                                case 6:
+                                case 7:
                                     GoodButOverPOQty = gr.Cells[j].Text;
                                     break;
-                                case 7:
+                                case 8:
                                     NotInspecQty = gr.Cells[j].Text;
                                     break;
-                                case 8:
+                                case 9:
                                     YellowQty = gr.Cells[j].Text;
                                     break;
-                                case 9:
+                                case 10:
                                     TooLightQty = gr.Cells[j].Text;
                                     break;
-                                case 10:
+                                case 11:
                                     CrackQty = gr.Cells[j].Text;
                                     break;
-                                case 11:
+                                case 12:
                                     BadCutQty = gr.Cells[j].Text;
                                     break;
-                                case 12:
+                                case 13:
                                     TooBigQty = gr.Cells[j].Text;
                                     break;
-                                case 13:
+                                case 14:
                                     TooSmallQty = gr.Cells[j].Text;
                                     break;
-                                case 14:
+                                case 15:
                                     Zoning = gr.Cells[j].Text;
                                     break;
-                                case 15:
+                                case 16:
                                     Clearity = gr.Cells[j].Text;
                                     break;
-                                case 16:
+                                case 17:
                                     Other = gr.Cells[j].Text;
                                     break;
-                                case 17:
+                                case 18:
                                     MissingQty = gr.Cells[j].Text;
                                     break;
-                                case 18:
+                                case 19:
                                     OverQty = gr.Cells[j].Text;
                                     break;
-                                case 19:
+                                case 20:
                                     ReturnQty = gr.Cells[j].Text;
                                     break;
-                                case 20:
+                                case 21:
                                     Remark = gr.Cells[j].Text;
                                     break;
-                                case 21:
+                                case 22:
                                     Reason = gr.Cells[j].Text;
                                     break;
-                                case 22:
+                                case 23:
                                     ShelfNo = gr.Cells[j].Text;
                                     break;
-                                case 23:
-                                    InspecType = gr.Cells[j].Text;
-                                    break;
+                                
 
                             }
                         }
@@ -293,6 +306,156 @@ namespace GJTH_ISPC
                         "OK",
                         false
                     );
+            }
+        }
+
+        private void SaveStoneData()
+        {
+            try
+            {
+                string MemoID = "";
+
+                if (grvData.Rows.Count > 0)
+                {
+                    MemoID = Server.HtmlDecode(grvData.Rows[0].Cells[3].Text)
+                                    .Replace("\u00A0", "")
+                                    .Trim();
+                }
+
+                string sqlChk =
+                    @"SELECT TOP 1 MemoID
+              FROM [AX-EXT].dbo.ISPC_ItemInspect
+              WHERE MemoID='" + MemoID.Replace("'", "''") + "'";
+
+                DataTable dtChk = db.QueryToDataTable(sqlChk);
+
+                if (dtChk.Rows.Count > 0)
+                {
+                    ShowModalDialog(
+                        "Warning",
+                        "❌ MemoID : " + MemoID + " already exists in the system.",
+                        "OK",
+                        false,
+                        "UploadFile.aspx"
+                    );
+                    return;
+                }
+
+                foreach (GridViewRow gr in grvData.Rows)
+                {
+                    string PO =
+                        Server.HtmlDecode(gr.Cells[1].Text)
+                        .Replace("\u00A0", "")
+                        .Trim();
+
+                 
+                    string ItemID =
+                        Server.HtmlDecode(gr.Cells[2].Text)
+                        .Replace("\u00A0", "")
+                        .Trim();
+
+                    string Memo =
+                     Server.HtmlDecode(gr.Cells[3].Text)
+                     .Replace("\u00A0", "")
+                     .Trim();
+
+
+                    decimal QTYRecv = 0;
+                    decimal.TryParse(gr.Cells[4].Text.Replace("&nbsp;", "").Trim(), out QTYRecv);
+
+                    decimal QTYGood = 0;
+                    decimal.TryParse(gr.Cells[5].Text.Replace("&nbsp;", "").Trim(), out QTYGood);
+
+                    decimal QTYScrap = 0;
+                    decimal.TryParse(gr.Cells[6].Text.Replace("&nbsp;", "").Trim(), out QTYScrap);
+
+                    decimal GoodButOverPOQty = 0;
+                    decimal.TryParse(gr.Cells[7].Text.Replace("&nbsp;", "").Trim(), out GoodButOverPOQty);
+
+                    decimal NotInspecQty = 0;
+                    decimal.TryParse(gr.Cells[8].Text.Replace("&nbsp;", "").Trim(), out NotInspecQty);
+
+                    decimal MissingQty = 0;
+                    decimal.TryParse(gr.Cells[9].Text.Replace("&nbsp;", "").Trim(), out MissingQty);
+
+                    decimal OverQty = 0;
+                    decimal.TryParse(gr.Cells[10].Text.Replace("&nbsp;", "").Trim(), out OverQty);
+
+
+
+                    string Reason =
+                        Server.HtmlDecode(gr.Cells[11].Text)
+                        .Replace("\u00A0", "")
+                        .Trim();
+
+                    decimal ReturnQty = 0;
+                    decimal.TryParse(gr.Cells[12].Text.Replace("&nbsp;", "").Trim(), out ReturnQty);
+
+                    string sqlP = @"
+                SELECT TOP 1 LINENUMBER,NAME
+                FROM PURCHLINE
+                WHERE PURCHID='" + PO.Replace("'", "''") + @"'
+                AND ITEMID='" + ItemID.Replace("'", "''") + "'";
+
+                    DataTable dtP = db.QueryToDataTable(sqlP);
+
+                    string PurchLineNo = "";
+                    string ItemName = "";
+
+                    if (dtP.Rows.Count > 0)
+                    {
+                        PurchLineNo = dtP.Rows[0]["LINENUMBER"].ToString();
+                        ItemName = dtP.Rows[0]["NAME"].ToString();
+                    }
+
+                    string strsql = @"
+            INSERT INTO [AX-EXT].dbo.ISPC_ItemInspect
+            (
+                PO, ItemID,ItemName,MemoID,QTYRecv,QTYGood,QTYScrap, GoodButOverPOQty,
+                NotInspecQty,MissingQty,OverQty,ReturnQty,Reason,PurchLineNo,
+                ShelfNo,CreateDate,InspecType,IsActive
+            )
+            VALUES
+            (
+                '" + PO + @"',
+                '" + ItemID + @"',
+                '" + ItemName + @"',
+                '" + Memo + @"',
+                '" + QTYRecv + @"',
+                '" + QTYGood + @"',
+                '" + QTYScrap + @"',
+                '" + GoodButOverPOQty + @"',
+                '" + NotInspecQty + @"',
+                '" + MissingQty + @"',
+                '" + OverQty + @"',
+                '" + ReturnQty + @"',
+                '" + Reason + @"',
+                '" + PurchLineNo + @"',
+                '0',
+                GETDATE(),
+                '1',
+                '1'
+            )";
+
+                    db.ExecuteDBExt(strsql);
+                }
+
+                ShowModalDialog(
+                    "Success",
+                    "Stone Template Import Success",
+                    "OK",
+                    false,
+                    "InspecList.aspx"
+                );
+            }
+            catch (Exception ex)
+            {
+                ShowModalDialog(
+                    "Error",
+                    ex.Message,
+                    "OK",
+                    false
+                );
             }
         }
 
