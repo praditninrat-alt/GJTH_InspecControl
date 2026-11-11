@@ -15,7 +15,7 @@ namespace GJTH_ISPC
         public static string Fupload;
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+            this.UnobtrusiveValidationMode = System.Web.UI.UnobtrusiveValidationMode.None;
 
             if (!Page.IsPostBack)
             {
@@ -74,16 +74,9 @@ namespace GJTH_ISPC
         {
             if (!ValidateTemplate())
             {
-                ScriptManager.RegisterStartupScript(
-                 this,
-                 this.GetType(),
-                 "alert",
-                 "alert('The uploaded file does not match the selected template.');",
-                 true);
-
+                ShowModalDialog("Warning", "The uploaded file does not match the selected template.", "OK", true);
                 return;
             }
-
 
             string strUserName = System.Web.HttpContext.Current.Request.LogonUserIdentity.Name.Split('\\')[1];
 
@@ -114,7 +107,7 @@ namespace GJTH_ISPC
 
                 if (rdoStone.Checked)
                 {
-                    return totalColumn >= 12;
+                    return totalColumn <= 12;
                 }
             }
 
