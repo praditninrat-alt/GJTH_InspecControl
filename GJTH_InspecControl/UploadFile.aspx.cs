@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -36,6 +37,31 @@ namespace GJTH_ISPC
         {
             
         }
+
+        private void btnNewwindow_Click(object sender, EventArgs e)
+        {
+
+            if (!ValidateTemplate())
+            {
+                ShowModalDialog("Warning", "The uploaded file does not match the selected template.", "OK", true);
+                return;
+            }
+
+            string strUserName = System.Web.HttpContext.Current.Request.LogonUserIdentity.Name.Split('\\')[1];
+
+            FileUpload1.SaveAs(Server.MapPath("~/App_Data/tempfile-" + strUserName + ".xlsx"));
+
+            string templateType = rdoDiamond.Checked ? "DIAMOND" : "STONE";
+
+            string url = "~/ViewUploadDetail.aspx?fileUpload="
+                        + System.Web.HttpUtility.UrlEncode(Fupload)
+                        + "&templateType="
+                        + templateType;
+
+            Response.Redirect(url);
+
+
+        }
         public void ShowModalDialog(string strHeader, string strDetail, string strButton, bool bIsWaring)
         {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
@@ -61,38 +87,13 @@ namespace GJTH_ISPC
             }
 
             sb.Append("$('#mdtrndetail').modal('show');");
-
+            
             sb.Append("</script>");
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ModalScript", sb.ToString(), false);
 
         }
 
-        
-
-        private void btnNewwindow_Click(object sender, EventArgs e)
-        {
-            if (!ValidateTemplate())
-            {
-                ShowModalDialog("Warning", "The uploaded file does not match the selected template.", "OK", true);
-                return;
-            }
-
-            string strUserName = System.Web.HttpContext.Current.Request.LogonUserIdentity.Name.Split('\\')[1];
-
-            FileUpload1.SaveAs(Server.MapPath("~/App_Data/tempfile-" + strUserName + ".xlsx"));
-
-            string templateType = rdoDiamond.Checked ? "DIAMOND" : "STONE";
-
-            string url = "~/ViewUploadDetail.aspx?fileUpload="
-                        + System.Web.HttpUtility.UrlEncode(Fupload)
-                        + "&templateType="
-                        + templateType;
-
-            Response.Redirect(url);
-
-
-        }
         private bool ValidateTemplate()
         {
             using (var package = new ExcelPackage(FileUpload1.PostedFile.InputStream))
@@ -100,6 +101,7 @@ namespace GJTH_ISPC
                 var ws = package.Workbook.Worksheets.First();
                 int totalColumn = ws.Dimension.End.Column;
 
+                
                 if (rdoDiamond.Checked)
                 {
                     return totalColumn >= 23;
@@ -113,6 +115,8 @@ namespace GJTH_ISPC
 
             return false;
         }
+        
+
 
     }
 }

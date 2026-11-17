@@ -127,10 +127,9 @@
             </div>
         </div>
     </div>
-
-    <!-- Modal Dialog -->
+   <!-- Modal Dialog -->
     <div id="mdtrndetail" class="modal fade bs-example-modal-sm" role="dialog" tabindex="-1">
-        <div class="modal-dialog" style="max-width:600px;">
+        <div class="modal-dialog" style="width:auto; max-width:450px;">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -147,6 +146,6 @@
         </div>
     </div>
 
- <script src="Scripts/bootstrap.min.js"></script>
-
+    <script src="Scripts/bootstrap.min.js"></script>
+ 
 </asp:Content>

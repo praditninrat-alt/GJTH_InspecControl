@@ -324,8 +324,8 @@ namespace GJTH_ISPC
 
                 string sqlChk =
                     @"SELECT TOP 1 MemoID
-              FROM [AX-EXT].dbo.ISPC_ItemInspect
-              WHERE MemoID='" + MemoID.Replace("'", "''") + "'";
+                      FROM [AX-EXT].dbo.ISPC_ItemInspect
+                      WHERE MemoID='" + MemoID.Replace("'", "''") + "'";
 
                 DataTable dtChk = db.QueryToDataTable(sqlChk);
 
@@ -392,10 +392,10 @@ namespace GJTH_ISPC
                     decimal.TryParse(gr.Cells[12].Text.Replace("&nbsp;", "").Trim(), out ReturnQty);
 
                     string sqlP = @"
-                SELECT TOP 1 LINENUMBER,NAME
-                FROM PURCHLINE
-                WHERE PURCHID='" + PO.Replace("'", "''") + @"'
-                AND ITEMID='" + ItemID.Replace("'", "''") + "'";
+                    SELECT TOP 1 LINENUMBER,NAME
+                    FROM PURCHLINE
+                    WHERE PURCHID='" + PO.Replace("'", "''") + @"'
+                    AND ITEMID='" + ItemID.Replace("'", "''") + "'";
 
                     DataTable dtP = db.QueryToDataTable(sqlP);
 
@@ -409,33 +409,33 @@ namespace GJTH_ISPC
                     }
 
                     string strsql = @"
-            INSERT INTO [AX-EXT].dbo.ISPC_ItemInspect
-            (
-                PO, ItemID,ItemName,MemoID,QTYRecv,QTYGood,QTYScrap, GoodButOverPOQty,
-                NotInspecQty,MissingQty,OverQty,ReturnQty,Reason,PurchLineNo,
-                ShelfNo,CreateDate,InspecType,IsActive
-            )
-            VALUES
-            (
-                '" + PO + @"',
-                '" + ItemID + @"',
-                '" + ItemName + @"',
-                '" + Memo + @"',
-                '" + QTYRecv + @"',
-                '" + QTYGood + @"',
-                '" + QTYScrap + @"',
-                '" + GoodButOverPOQty + @"',
-                '" + NotInspecQty + @"',
-                '" + MissingQty + @"',
-                '" + OverQty + @"',
-                '" + ReturnQty + @"',
-                '" + Reason + @"',
-                '" + PurchLineNo + @"',
-                '0',
-                GETDATE(),
-                '1',
-                '1'
-            )";
+                    INSERT INTO [AX-EXT].dbo.ISPC_ItemInspect
+                    (
+                        PO, ItemID,ItemName,MemoID,QTYRecv,QTYGood,QTYScrap, GoodButOverPOQty,
+                        NotInspecQty,MissingQty,OverQty,ReturnQty,Reason,PurchLineNo,
+                        ShelfNo,CreateDate,InspecType,IsActive
+                    )
+                    VALUES
+                    (
+                        '" + PO + @"',
+                        '" + ItemID + @"',
+                        '" + ItemName + @"',
+                        '" + Memo + @"',
+                        '" + QTYRecv + @"',
+                        '" + QTYGood + @"',
+                        '" + QTYScrap + @"',
+                        '" + GoodButOverPOQty + @"',
+                        '" + NotInspecQty + @"',
+                        '" + MissingQty + @"',
+                        '" + OverQty + @"',
+                        '" + ReturnQty + @"',
+                        '" + Reason + @"',
+                        '" + PurchLineNo + @"',
+                        '0',
+                        GETDATE(),
+                        '1',
+                        '1'
+                    )";
 
                     db.ExecuteDBExt(strsql);
                 }
