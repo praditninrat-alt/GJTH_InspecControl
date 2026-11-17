@@ -63,7 +63,7 @@ namespace GJTH_ISPC
 
 
                 PO = Server.HtmlDecode(grvData.Rows[0].Cells[1].Text).Replace("\u00A0", "").Trim();
-                string MemoID = Server.HtmlDecode(grvData.Rows[0].Cells[3].Text)
+                string MemoID = Server.HtmlDecode(grvData.Rows[0].Cells[4].Text)
                    .Replace("\u00A0", "")
                    .Trim();
 
@@ -102,6 +102,12 @@ namespace GJTH_ISPC
 
                 foreach (GridViewRow gr in grvData.Rows)
                 {
+                    string itemId = gr.Cells[2].Text.Trim();
+
+                    if (itemId == "Qty.To Receive")
+                        continue;
+
+
                     PO = Server.HtmlDecode(gr.Cells[1].Text).Replace("\u00A0", "").Trim();
 
                     ItemID = Server.HtmlDecode(gr.Cells[2].Text).Replace("\u00A0", "").Trim();
@@ -164,67 +170,67 @@ namespace GJTH_ISPC
                                 case 2:
                                     ItemID = gr.Cells[j].Text;
                                     break;
-                                case 3:
+                                case 4:
                                     MemoID = gr.Cells[j].Text;
                                     break;
-                                case 4:
+                                case 5:
                                     QTYRecv = gr.Cells[j].Text;
                                     break;
-                                case 5:
+                                case 6:
                                     QTYGood = gr.Cells[j].Text;
                                     break;
-                                case 6:
+                                case 7:
                                     QTYScrap = gr.Cells[j].Text;
                                     break;
-                                case 7:
+                                case 8:
                                     GoodButOverPOQty = gr.Cells[j].Text;
                                     break;
-                                case 8:
+                                case 9:
                                     NotInspecQty = gr.Cells[j].Text;
                                     break;
-                                case 9:
+                                case 10:
                                     YellowQty = gr.Cells[j].Text;
                                     break;
-                                case 10:
+                                case 11:
                                     TooLightQty = gr.Cells[j].Text;
                                     break;
-                                case 11:
+                                case 12:
                                     CrackQty = gr.Cells[j].Text;
                                     break;
-                                case 12:
+                                case 13:
                                     BadCutQty = gr.Cells[j].Text;
                                     break;
-                                case 13:
+                                case 14:
                                     TooBigQty = gr.Cells[j].Text;
                                     break;
-                                case 14:
+                                case 15:
                                     TooSmallQty = gr.Cells[j].Text;
                                     break;
-                                case 15:
+                                case 16:
                                     Zoning = gr.Cells[j].Text;
                                     break;
-                                case 16:
+                                case 17:
                                     Clearity = gr.Cells[j].Text;
                                     break;
-                                case 17:
+                                case 18:
                                     Other = gr.Cells[j].Text;
                                     break;
-                                case 18:
+                                case 19:
                                     MissingQty = gr.Cells[j].Text;
                                     break;
-                                case 19:
+                                case 20:
                                     OverQty = gr.Cells[j].Text;
                                     break;
-                                case 20:
+                                case 21:
                                     ReturnQty = gr.Cells[j].Text;
                                     break;
-                                case 21:
+                                case 22:
                                     Remark = gr.Cells[j].Text;
                                     break;
-                                case 22:
+                                case 23:
                                     Reason = gr.Cells[j].Text;
                                     break;
-                                case 23:
+                                case 24:
                                     ShelfNo = gr.Cells[j].Text;
                                     break;
                                 
@@ -317,7 +323,7 @@ namespace GJTH_ISPC
 
                 if (grvData.Rows.Count > 0)
                 {
-                    MemoID = Server.HtmlDecode(grvData.Rows[0].Cells[3].Text)
+                    MemoID = Server.HtmlDecode(grvData.Rows[0].Cells[4].Text)
                                     .Replace("\u00A0", "")
                                     .Trim();
                 }
@@ -343,6 +349,11 @@ namespace GJTH_ISPC
 
                 foreach (GridViewRow gr in grvData.Rows)
                 {
+                    string itemId = gr.Cells[2].Text.Trim();
+
+                    if (itemId == "Qty.To Receive")
+                        continue;
+
                     string PO =
                         Server.HtmlDecode(gr.Cells[1].Text)
                         .Replace("\u00A0", "")
@@ -355,41 +366,41 @@ namespace GJTH_ISPC
                         .Trim();
 
                     string Memo =
-                     Server.HtmlDecode(gr.Cells[3].Text)
+                     Server.HtmlDecode(gr.Cells[4].Text)
                      .Replace("\u00A0", "")
                      .Trim();
 
 
                     decimal QTYRecv = 0;
-                    decimal.TryParse(gr.Cells[4].Text.Replace("&nbsp;", "").Trim(), out QTYRecv);
+                    decimal.TryParse(gr.Cells[5].Text.Replace("&nbsp;", "").Trim(), out QTYRecv);
 
                     decimal QTYGood = 0;
-                    decimal.TryParse(gr.Cells[5].Text.Replace("&nbsp;", "").Trim(), out QTYGood);
+                    decimal.TryParse(gr.Cells[6].Text.Replace("&nbsp;", "").Trim(), out QTYGood);
 
                     decimal QTYScrap = 0;
-                    decimal.TryParse(gr.Cells[6].Text.Replace("&nbsp;", "").Trim(), out QTYScrap);
+                    decimal.TryParse(gr.Cells[7].Text.Replace("&nbsp;", "").Trim(), out QTYScrap);
 
                     decimal GoodButOverPOQty = 0;
-                    decimal.TryParse(gr.Cells[7].Text.Replace("&nbsp;", "").Trim(), out GoodButOverPOQty);
+                    decimal.TryParse(gr.Cells[8].Text.Replace("&nbsp;", "").Trim(), out GoodButOverPOQty);
 
                     decimal NotInspecQty = 0;
-                    decimal.TryParse(gr.Cells[8].Text.Replace("&nbsp;", "").Trim(), out NotInspecQty);
+                    decimal.TryParse(gr.Cells[9].Text.Replace("&nbsp;", "").Trim(), out NotInspecQty);
 
                     decimal MissingQty = 0;
-                    decimal.TryParse(gr.Cells[9].Text.Replace("&nbsp;", "").Trim(), out MissingQty);
+                    decimal.TryParse(gr.Cells[10].Text.Replace("&nbsp;", "").Trim(), out MissingQty);
 
                     decimal OverQty = 0;
-                    decimal.TryParse(gr.Cells[10].Text.Replace("&nbsp;", "").Trim(), out OverQty);
+                    decimal.TryParse(gr.Cells[11].Text.Replace("&nbsp;", "").Trim(), out OverQty);
 
 
 
                     string Reason =
-                        Server.HtmlDecode(gr.Cells[11].Text)
+                        Server.HtmlDecode(gr.Cells[12].Text)
                         .Replace("\u00A0", "")
                         .Trim();
 
                     decimal ReturnQty = 0;
-                    decimal.TryParse(gr.Cells[12].Text.Replace("&nbsp;", "").Trim(), out ReturnQty);
+                    decimal.TryParse(gr.Cells[13].Text.Replace("&nbsp;", "").Trim(), out ReturnQty);
 
                     string sqlP = @"
                     SELECT TOP 1 LINENUMBER,NAME
@@ -498,32 +509,106 @@ namespace GJTH_ISPC
         private void readExcel()
         {
             string strUserName = System.Web.HttpContext.Current.Request.LogonUserIdentity.Name.Split('\\')[1];
-            FileStream fs = new FileStream(Server.MapPath("~/App_Data/tempfile-" + strUserName + ".xlsx"), FileMode.Open, FileAccess.Read);
-            try
+
+            string filePath = Server.MapPath("~/App_Data/tempfile-" + strUserName + ".xlsx");
+
+            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
             {
-
-
-                if (Path.GetExtension(fileUpload) == ".xlsx" || Path.GetExtension(fileUpload) == ".xls")
+                try
                 {
+                    string ext = Path.GetExtension(fileUpload);
 
-                    ExcelPackage package = new ExcelPackage(fs);
+                    if (ext == ".xlsx" || ext == ".xls")
+                    {
+                        ExcelPackage package = new ExcelPackage(fs);
 
-                    grvData.DataSource = package.ToDataTable();
+                        // อ่าน Excel เป็น DataTable
+                        DataTable dt = package.ToDataTable();
 
-                    grvData.DataBind();
+                        // เพิ่ม Column NAME
+                        if (!dt.Columns.Contains("NAME"))
+                        {
+                            DataColumn colName = dt.Columns.Add("NAME", typeof(string));
+
+                            // ย้าย NAME ไปอยู่หลัง ItemID
+                            colName.SetOrdinal(dt.Columns["ItemID"].Ordinal + 1);
+                        }
+
+                        //------------------------------------------------
+                        // ดึงข้อมูล ITEMID + NAME จาก _V_ItemDesc
+                        //------------------------------------------------
+                        string sqlP = @"
+                            SELECT ITEMID,
+                               MAX(NAME) AS NAME
+                        FROM _V_ItemDesc
+                        GROUP BY ITEMID";
+
+                        DataTable dtPurch = db.QueryToDataTable(sqlP);
+
+                        //------------------------------------------------
+                        // สร้าง Dictionary
+                        //------------------------------------------------
+                        Dictionary<string, string> itemNames =
+                            dtPurch.AsEnumerable()
+                                   .GroupBy(r => r["ITEMID"].ToString().Trim())
+                                   .ToDictionary(
+                                        g => g.Key,
+                                        g => g.First()["NAME"].ToString()
+                                   );
+
+                        //------------------------------------------------
+                        // เติม NAME กลับเข้า DataTable
+                        //------------------------------------------------
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            string itemId = dr["ItemID"].ToString().Trim();
+
+                            if (itemNames.ContainsKey(itemId))
+                            {
+                                dr["NAME"] = itemNames[itemId];
+                            }
+                            else
+                            {
+                                dr["NAME"] = "";
+                            }
+                        }
+
+                        //------------------------------------------------
+                        // SUM QTY Recv
+                        //------------------------------------------------
+                        decimal totalQtyRecv = 0;
+
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            decimal qtyRecv;
+                            decimal.TryParse(
+                                dr["QTYRecv"].ToString(),
+                                out qtyRecv);
+
+                            totalQtyRecv += qtyRecv;
+                        }
+
+                        // เพิ่มแถว Total
+                        DataRow totalRow = dt.NewRow();
+
+                        totalRow["ItemID"] = "Qty.To Receive";
+                        totalRow["QTYRecv"] = totalQtyRecv.ToString("N0");
+
+                        dt.Rows.Add(totalRow);
+
+                        //------------------------------------------------
+                        // Bind GridView
+                        //------------------------------------------------
+                        grvData.DataSource = dt;
+                        grvData.DataBind();
+                    }
                 }
-
-
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(
+                        "readExcel Error : " + ex.Message);
+                }
             }
-            catch (Exception readExp)
-            {
-
-                //Label1.Text = readExp.Message + "\n" + "fileUpload " + fileUpload;
-
-                System.Diagnostics.Debug.WriteLine("Tag UnRead Excel : " + readExp.Message);
-
-            }
-            fs.Close();
         }
 
         protected void btnUp_Click(object sender, EventArgs e)
@@ -532,6 +617,36 @@ namespace GJTH_ISPC
             Response.Redirect("~/UploadFile.aspx");
         }
 
+        protected void grvData_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                DataRowView drv = (DataRowView)e.Row.DataItem;
+
+                if (drv["ItemID"].ToString() == "Qty.To Receive")
+                {
+                    e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#FFF2CC");
+                    
+                    e.Row.Font.Bold = true;
+                    e.Row.Cells[0].Font.Size = FontUnit.Point(11);
+                    // Merge ตั้งแต่ No ถึง MemoID
+                    e.Row.Cells[0].Text = "Qty.To Receive";
+                    e.Row.Cells[0].HorizontalAlign = HorizontalAlign.Center;
+                    e.Row.Cells[0].ForeColor = System.Drawing.Color.DarkBlue;
+                    e.Row.Cells[0].ColumnSpan = 5;
+
+                    for (int i = 1; i <= 4; i++)
+                    {
+                        e.Row.Cells[i].Visible = false;
+                    }
+
+                    // QTYRecv สีแดง
+                    e.Row.Cells[5].ForeColor = System.Drawing.Color.Red;
+                    e.Row.Cells[5].Font.Bold = true;
+                    e.Row.Cells[5].HorizontalAlign = HorizontalAlign.Right;
+                }
+            }
+        }
     }
     public static class ExcelPackageExtensions
     {

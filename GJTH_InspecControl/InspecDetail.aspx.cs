@@ -230,20 +230,38 @@ namespace GJTH_ISPC
 
             string strsql = "";
 
-            strsql = @" select ROW_NUMBER() OVER(ORDER BY pl.LINENUMBER ASC) AS RowSeq,pt.PURCHID,pt.PURCHNAME,pl.CUSTOMERREF,pl.LINENUMBER PURCHASELINELINENUMBER,pl.PURCHID ORIGPURCHID
-                        ,pl.ITEMID,vw.NAME,pl.PURCHQTY 'POQty',ins.QTYRecv as 'RecQty',ins.QTYGood as 'GoodQty',ins.QTYScrap as 'ScrapQty'
-                        ,pl.PURCHPRICE,pl.LINEAMOUNT Amt
-                        ,NotInspecQty,GoodButOverPOQty,YellowQty,TooLightQty,CrackQty,BadCutQty,TooBigQty,TooSmallQty,Zoning
-                        ,Clearity,Other,Remark,Reason
-                        ,ins.MissingQty,ins.OverQty,ins.RowID,ins.po,ins.MemoID,ins.ShelfNo ,ins.InspecType,ins.ReturnQTY
-                        from PURCHTABLE pt
-                        left outer join Purchline pl on pt.purchID = pl.purchid
-                        left outer join [AX-EXT].dbo.ISPC_ItemInspect ins on ins.ItemID = pl.ITEMID 
-                        and ins.po = pt.PURCHID 
-                        and ins.PurchLineNo = pl.LINENUMBER
-                        left outer join _V_ItemDesc vw on vw.ITEMID = pl.ITEMID
-                       where  ins.MemoID='" + txtInvData.Text + "'";
-            strsql += " Order by pl.LINENUMBER ";
+            //strsql = @" select ROW_NUMBER() OVER(ORDER BY pl.LINENUMBER ASC) AS RowSeq,pt.PURCHID,pt.PURCHNAME,pl.CUSTOMERREF,pl.LINENUMBER PURCHASELINELINENUMBER,pl.PURCHID ORIGPURCHID
+            //            ,pl.ITEMID,vw.NAME,pl.PURCHQTY 'POQty',ins.QTYRecv as 'RecQty',ins.QTYGood as 'GoodQty',ins.QTYScrap as 'ScrapQty'
+            //            ,pl.PURCHPRICE,pl.LINEAMOUNT Amt
+            //            ,NotInspecQty,GoodButOverPOQty,YellowQty,TooLightQty,CrackQty,BadCutQty,TooBigQty,TooSmallQty,Zoning
+            //            ,Clearity,Other,Remark,Reason
+            //            ,ins.MissingQty,ins.OverQty,ins.RowID,ins.po,ins.MemoID,ins.ShelfNo ,ins.InspecType,ins.ReturnQTY
+            //            from PURCHTABLE pt
+            //            left outer join Purchline pl on pt.purchID = pl.purchid
+            //            left outer join [AX-EXT].dbo.ISPC_ItemInspect ins on ins.ItemID = pl.ITEMID 
+            //            and ins.po = pt.PURCHID 
+            //            and ins.PurchLineNo = pl.LINENUMBER
+            //            left outer join _V_ItemDesc vw on vw.ITEMID = pl.ITEMID
+            //           where  ins.MemoID='" + txtInvData.Text + "'";
+            //strsql += " Order by pl.LINENUMBER ";
+
+
+            strsql = @"SELECT 
+                        ROW_NUMBER() OVER(ORDER BY ins.PurchLineNo ) AS 'RowSeq',
+                        ins.po as PURCHID,'' as PURCHNAME,'' as CUSTOMERREF,'' as PURCHASELINELINENUMBER,
+                        ins.po as ORIGPURCHID,ins.ITEMID,vw.NAME,ins.QTYRecv AS'POQty'
+                        ,ins.QTYRecv as 'RecQty',ins.QTYGood as 'GoodQty',ins.QTYScrap as 'ScrapQty','' as PURCHPRICE,'' as  Amt
+                        ,ins.NotInspecQty,ins.GoodButOverPOQty,ins.YellowQty,ins.TooLightQty,ins.CrackQty,ins.BadCutQty,
+                        ins.TooBigQty,ins.TooSmallQty,ins.Zoning,ins.Clearity,ins.Other,ins.Remark,ins.Reason,ins.MissingQty,
+                        ins.OverQty,ins.RowID,ins.po,ins.MemoID,ins.ShelfNo,ins.InspecType,ins.ReturnQTY
+                    FROM [AX-EXT].dbo.ISPC_ItemInspect ins
+                        --INNER JOIN dbo.[PURCHLINE] pl ON ins.ItemID = pl.ITEMID 
+                        --   AND ins.po = pl.PURCHID 
+                        --  AND ins.PurchLineNo = pl.LINENUMBER
+                        --INNER JOIN dbo.[PURCHTABLE] pt ON pl.PURCHID = pt.PURCHID
+                    LEFT OUTER JOIN dbo.[_V_ItemDesc] vw ON vw.ITEMID = ins.ITEMID
+                    where  ins.MemoID='" + txtInvData.Text + "'" + Environment.NewLine;
+            strsql += "ORDER BY ins.PurchLineNo ";
 
             DataTable dtData = db.QueryToDataTable(strsql);
 

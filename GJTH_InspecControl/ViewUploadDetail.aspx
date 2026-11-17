@@ -153,7 +153,8 @@
             ID="grvData"
             runat="server"
             AutoGenerateColumns="True"
-            PageSize="20">
+            PageSize="20"
+             OnRowDataBound="grvData_RowDataBound">
 
             <AlternatingRowStyle BackColor="White" />
 
