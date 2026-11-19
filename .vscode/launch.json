@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "▶ Run with IIS Express (Edge)",
+      "type": "msedge",
+      "request": "launch",
+      "url": "http://localhost:52564/Default.aspx",
+      "webRoot": "${workspaceFolder}/GJTH_InspecControl",
+      "preLaunchTask": "build-and-start-iis",
+      "sourceMaps": false,
+      "presentation": {
+        "hidden": false,
+        "group": "",
+        "order": 1
+      }
+    }
+  ]
+}

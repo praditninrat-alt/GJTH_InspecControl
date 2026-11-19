@@ -247,7 +247,7 @@ namespace GJTH_ISPC
 
 
             strsql = @"SELECT 
-                        ROW_NUMBER() OVER(ORDER BY ins.RowID ) AS 'RowSeq',
+                        ROW_NUMBER() OVER(ORDER BY ins.RowID ) AS RowSeq,
                         ins.po as PURCHID,'' as PURCHNAME,'' as CUSTOMERREF,'' as PURCHASELINELINENUMBER,
                         ins.po as ORIGPURCHID,ins.ITEMID,vw.NAME,ins.QTYRecv AS'POQty'
                         ,ins.QTYRecv as 'RecQty',ins.QTYGood as 'GoodQty',ins.QTYScrap as 'ScrapQty','' as PURCHPRICE,'' as  Amt
