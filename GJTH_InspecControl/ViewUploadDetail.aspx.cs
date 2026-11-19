@@ -59,26 +59,45 @@ namespace GJTH_ISPC
                 string strsql = "";
                 string PO = "";
                 string ItemID = "";
-
-
-
-                PO = Server.HtmlDecode(grvData.Rows[0].Cells[1].Text).Replace("\u00A0", "").Trim();
-                string MemoID = Server.HtmlDecode(grvData.Rows[0].Cells[4].Text)
+                string Supplier = "";
+                string MemoID = "";
+                if (grvData.Rows.Count > 0)
+                {
+                     MemoID = Server.HtmlDecode(grvData.Rows[0].Cells[4].Text)
                    .Replace("\u00A0", "")
                    .Trim();
 
+                    Supplier = Server.HtmlDecode(grvData.Rows[0].Cells[5].Text)
+                                       .Replace("\u00A0", "")
+                                       .Trim();
+                    PO = Server.HtmlDecode(grvData.Rows[0].Cells[1].Text)
+                                       .Replace("\u00A0", "")
+                                       .Trim();
+                }
                 //** เช็คเงื่อนไข ต่างๆ ก่อนทำการ Insert into Data**//
-                if (string.IsNullOrWhiteSpace(PO) || string.IsNullOrWhiteSpace(MemoID))
+                if (string.IsNullOrWhiteSpace(MemoID))
                 {
                     ShowModalDialog(
                         "Warning",
-                        "PO And MemoID cannot be blank. Please check the uploaded file.",
+                        "MemoID cannot be blank. Please check the uploaded file.",
                         "OK",
                         false
                     );
 
                     return;
                 }
+                if (string.IsNullOrWhiteSpace(PO) && string.IsNullOrWhiteSpace(Supplier) )
+                {
+                    ShowModalDialog(
+                        "Warning",
+                        "Supplier Code cannot be blank. Please check the uploaded file.",
+                        "OK",
+                        false
+                    );
+
+                    return;
+                }
+
                 string sql = @"
                         SELECT TOP 1 MemoID
                         FROM [AX-EXT].dbo. ISPC_ItemInspect
@@ -111,23 +130,10 @@ namespace GJTH_ISPC
                     PO = Server.HtmlDecode(gr.Cells[1].Text).Replace("\u00A0", "").Trim();
 
                     ItemID = Server.HtmlDecode(gr.Cells[2].Text).Replace("\u00A0", "").Trim();
-
-                    string sqlP = @"
-                        SELECT TOP 1 PURCHID, ITEMID, LINENUMBER,NAME
-                        FROM PURCHLINE
-                        WHERE PURCHID = '" + PO.Replace("'", "''") + @"'
-                        AND ITEMID = '" + ItemID.Replace("'", "''") + "'";
-
-                    DataTable dtChkP = db.QueryToDataTable(sqlP);
-
+                    
                     string PurchLineNo = "";
                     string ItemName = "";
-
-                    if (dtChkP.Rows.Count > 0)
-                    {
-                        PurchLineNo = dtChkP.Rows[0]["LINENUMBER"].ToString();
-                        ItemName = dtChkP.Rows[0]["NAME"].ToString();
-                    }
+                    
 
                     PO = "";
                     ItemID = "";
@@ -174,72 +180,108 @@ namespace GJTH_ISPC
                                     MemoID = gr.Cells[j].Text;
                                     break;
                                 case 5:
-                                    QTYRecv = gr.Cells[j].Text;
+                                    Supplier = gr.Cells[j].Text;
                                     break;
                                 case 6:
-                                    QTYGood = gr.Cells[j].Text;
+                                    QTYRecv = gr.Cells[j].Text;
                                     break;
                                 case 7:
-                                    QTYScrap = gr.Cells[j].Text;
+                                    QTYGood = gr.Cells[j].Text;
                                     break;
                                 case 8:
-                                    GoodButOverPOQty = gr.Cells[j].Text;
+                                    QTYScrap = gr.Cells[j].Text;
                                     break;
                                 case 9:
-                                    NotInspecQty = gr.Cells[j].Text;
+                                    GoodButOverPOQty = gr.Cells[j].Text;
                                     break;
                                 case 10:
-                                    YellowQty = gr.Cells[j].Text;
+                                    NotInspecQty = gr.Cells[j].Text;
                                     break;
                                 case 11:
-                                    TooLightQty = gr.Cells[j].Text;
+                                    YellowQty = gr.Cells[j].Text;
                                     break;
                                 case 12:
-                                    CrackQty = gr.Cells[j].Text;
+                                    TooLightQty = gr.Cells[j].Text;
                                     break;
                                 case 13:
-                                    BadCutQty = gr.Cells[j].Text;
+                                    CrackQty = gr.Cells[j].Text;
                                     break;
                                 case 14:
-                                    TooBigQty = gr.Cells[j].Text;
+                                    BadCutQty = gr.Cells[j].Text;
                                     break;
                                 case 15:
-                                    TooSmallQty = gr.Cells[j].Text;
+                                    TooBigQty = gr.Cells[j].Text;
                                     break;
                                 case 16:
-                                    Zoning = gr.Cells[j].Text;
+                                    TooSmallQty = gr.Cells[j].Text;
                                     break;
                                 case 17:
-                                    Clearity = gr.Cells[j].Text;
+                                    Zoning = gr.Cells[j].Text;
                                     break;
                                 case 18:
-                                    Other = gr.Cells[j].Text;
+                                    Clearity = gr.Cells[j].Text;
                                     break;
                                 case 19:
-                                    MissingQty = gr.Cells[j].Text;
+                                    Other = gr.Cells[j].Text;
                                     break;
                                 case 20:
-                                    OverQty = gr.Cells[j].Text;
+                                    MissingQty = gr.Cells[j].Text;
                                     break;
                                 case 21:
-                                    ReturnQty = gr.Cells[j].Text;
+                                    OverQty = gr.Cells[j].Text;
                                     break;
                                 case 22:
-                                    Remark = gr.Cells[j].Text;
+                                    ReturnQty = gr.Cells[j].Text;
                                     break;
                                 case 23:
-                                    Reason = gr.Cells[j].Text;
+                                    Remark = gr.Cells[j].Text;
                                     break;
                                 case 24:
+                                    Reason = gr.Cells[j].Text;
+                                    break;
+                                case 25:
                                     ShelfNo = gr.Cells[j].Text;
                                     break;
-                                
+
 
                             }
                         }
                     }
 
+                    if (PO != "")
+                    {
+                        string sqlP = @"
+                        SELECT TOP 1 LINENUMBER,NAME,VENDACCOUNT
+                        FROM PURCHLINE
+                        WHERE PURCHID='" + PO.Replace("'", "''") + @"'
+                        AND ITEMID='" + ItemID.Replace("'", "''") + "'";
 
+                        DataTable dtP = db.QueryToDataTable(sqlP);
+
+                        if (dtP.Rows.Count > 0)
+                        {
+                            PurchLineNo = dtP.Rows[0]["LINENUMBER"].ToString();
+                            ItemName = dtP.Rows[0]["NAME"].ToString();
+                            Supplier = dtP.Rows[0]["VENDACCOUNT"].ToString();
+                        }
+
+
+                    }
+                    else
+                    {
+                        string sqlP = @"SELECT top 1 ITEMID, NAME,0 AS PurchLineNo FROM _V_ItemDesc
+                        WHERE ITEMID='" + ItemID.Replace("'", "''") + "'";
+
+                        DataTable dtP = db.QueryToDataTable(sqlP);
+
+                        if (dtP.Rows.Count > 0)
+                        {
+                            PurchLineNo = dtP.Rows[0]["PurchLineNo"].ToString();
+                            ItemName = dtP.Rows[0]["NAME"].ToString();
+                        }
+
+
+                    }
 
                     //---Chkeck Data Decimal
 
@@ -265,7 +307,7 @@ namespace GJTH_ISPC
 
                     //---Keep Data from AXDB
 
-                    strsql = "insert into [AX-EXT].dbo.ISPC_ItemInspect (PO,ItemID,ItemName,MemoID,QTYRecv,QTYGood,QTYScrap,GoodButOverPOQty,NotInspecQty,YellowQty,TooLightQty,CrackQty,BadCutQty,TooBigQty,TooSmallQty,Zoning,Clearity,Other,MissingQty,OverQty,ReturnQty,Remark,Reason,PurchLineNo,ShelfNo,CreateDate,InspecType,IsActive )values(";
+                    strsql = "insert into [AX-EXT].dbo.ISPC_ItemInspect (PO,ItemID,ItemName,MemoID,QTYRecv,QTYGood,QTYScrap,GoodButOverPOQty,NotInspecQty,YellowQty,TooLightQty,CrackQty,BadCutQty,TooBigQty,TooSmallQty,Zoning,Clearity,Other,MissingQty,OverQty,ReturnQty,Remark,Reason,PurchLineNo,ShelfNo,CreateDate,InspecType,Createby,SupplierCode,IsActive )values(";
                     strsql += "'" + PO + "',";
                     strsql += "'" + ItemID + "',";
                     strsql += "'" + ItemName + "',";
@@ -293,6 +335,8 @@ namespace GJTH_ISPC
                     strsql += "'" + dShelfNo + "',";
                     strsql += "'" + CreateDate + "',";
                     strsql += "'" + sInspecType + "',";
+                    strsql += "'" + strUserId + "',";
+                    strsql += "'" + Supplier + "',";
                     strsql += "'1'";
                     strsql += ")";
 
@@ -319,15 +363,45 @@ namespace GJTH_ISPC
         {
             try
             {
+                string PO = "";
                 string MemoID = "";
-
+                string Supplier = "";
                 if (grvData.Rows.Count > 0)
                 {
+                    PO = Server.HtmlDecode(grvData.Rows[0].Cells[1].Text)
+                                       .Replace("\u00A0", "")
+                                       .Trim();
                     MemoID = Server.HtmlDecode(grvData.Rows[0].Cells[4].Text)
                                     .Replace("\u00A0", "")
                                     .Trim();
-                }
 
+                    Supplier = Server.HtmlDecode(grvData.Rows[0].Cells[5].Text)
+                                    .Replace("\u00A0", "")
+                                    .Trim();
+                    
+                }
+                if (string.IsNullOrWhiteSpace(MemoID))
+                {
+                    ShowModalDialog(
+                        "Warning",
+                        "MemoID cannot be blank. Please check the uploaded file.",
+                        "OK",
+                        false
+                    );
+
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(PO) && string.IsNullOrWhiteSpace(Supplier))
+                {
+                    ShowModalDialog(
+                        "Warning",
+                        "Supplier Code cannot be blank. Please check the uploaded file.",
+                        "OK",
+                        false
+                    );
+
+                    return;
+                }
                 string sqlChk =
                     @"SELECT TOP 1 MemoID
                       FROM [AX-EXT].dbo.ISPC_ItemInspect
@@ -354,12 +428,12 @@ namespace GJTH_ISPC
                     if (itemId == "Qty.To Receive")
                         continue;
 
-                    string PO =
+                     PO =
                         Server.HtmlDecode(gr.Cells[1].Text)
                         .Replace("\u00A0", "")
                         .Trim();
 
-                 
+
                     string ItemID =
                         Server.HtmlDecode(gr.Cells[2].Text)
                         .Replace("\u00A0", "")
@@ -370,61 +444,84 @@ namespace GJTH_ISPC
                      .Replace("\u00A0", "")
                      .Trim();
 
-
+                    string SupplierCode =
+                      Server.HtmlDecode(gr.Cells[5].Text)
+                     .Replace("\u00A0", "")
+                     .Trim();
                     decimal QTYRecv = 0;
-                    decimal.TryParse(gr.Cells[5].Text.Replace("&nbsp;", "").Trim(), out QTYRecv);
+                    decimal.TryParse(gr.Cells[6].Text.Replace("&nbsp;", "").Trim(), out QTYRecv);
 
                     decimal QTYGood = 0;
-                    decimal.TryParse(gr.Cells[6].Text.Replace("&nbsp;", "").Trim(), out QTYGood);
+                    decimal.TryParse(gr.Cells[7].Text.Replace("&nbsp;", "").Trim(), out QTYGood);
 
                     decimal QTYScrap = 0;
-                    decimal.TryParse(gr.Cells[7].Text.Replace("&nbsp;", "").Trim(), out QTYScrap);
+                    decimal.TryParse(gr.Cells[8].Text.Replace("&nbsp;", "").Trim(), out QTYScrap);
 
                     decimal GoodButOverPOQty = 0;
-                    decimal.TryParse(gr.Cells[8].Text.Replace("&nbsp;", "").Trim(), out GoodButOverPOQty);
+                    decimal.TryParse(gr.Cells[9].Text.Replace("&nbsp;", "").Trim(), out GoodButOverPOQty);
 
                     decimal NotInspecQty = 0;
-                    decimal.TryParse(gr.Cells[9].Text.Replace("&nbsp;", "").Trim(), out NotInspecQty);
+                    decimal.TryParse(gr.Cells[10].Text.Replace("&nbsp;", "").Trim(), out NotInspecQty);
 
                     decimal MissingQty = 0;
-                    decimal.TryParse(gr.Cells[10].Text.Replace("&nbsp;", "").Trim(), out MissingQty);
+                    decimal.TryParse(gr.Cells[11].Text.Replace("&nbsp;", "").Trim(), out MissingQty);
 
                     decimal OverQty = 0;
-                    decimal.TryParse(gr.Cells[11].Text.Replace("&nbsp;", "").Trim(), out OverQty);
+                    decimal.TryParse(gr.Cells[12].Text.Replace("&nbsp;", "").Trim(), out OverQty);
 
 
 
                     string Reason =
-                        Server.HtmlDecode(gr.Cells[12].Text)
+                        Server.HtmlDecode(gr.Cells[13].Text)
                         .Replace("\u00A0", "")
                         .Trim();
 
                     decimal ReturnQty = 0;
-                    decimal.TryParse(gr.Cells[13].Text.Replace("&nbsp;", "").Trim(), out ReturnQty);
-
-                    string sqlP = @"
-                    SELECT TOP 1 LINENUMBER,NAME
-                    FROM PURCHLINE
-                    WHERE PURCHID='" + PO.Replace("'", "''") + @"'
-                    AND ITEMID='" + ItemID.Replace("'", "''") + "'";
-
-                    DataTable dtP = db.QueryToDataTable(sqlP);
-
+                    decimal.TryParse(gr.Cells[14].Text.Replace("&nbsp;", "").Trim(), out ReturnQty);
+                   
                     string PurchLineNo = "";
                     string ItemName = "";
-
-                    if (dtP.Rows.Count > 0)
+                    if (PO != "")
                     {
-                        PurchLineNo = dtP.Rows[0]["LINENUMBER"].ToString();
-                        ItemName = dtP.Rows[0]["NAME"].ToString();
+                        string sqlP = @"
+                        SELECT TOP 1 LINENUMBER,NAME,VENDACCOUNT
+                        FROM PURCHLINE
+                        WHERE PURCHID='" + PO.Replace("'", "''") + @"'
+                        AND ITEMID='" + ItemID.Replace("'", "''") + "'";
+
+                        DataTable dtP = db.QueryToDataTable(sqlP);
+
+                        if (dtP.Rows.Count > 0)
+                        {
+                            PurchLineNo = dtP.Rows[0]["LINENUMBER"].ToString();
+                            ItemName = dtP.Rows[0]["NAME"].ToString();
+                            SupplierCode = dtP.Rows[0]["VENDACCOUNT"].ToString();
+                        }
+
+
+                    }
+                    else
+                    {
+                        string sqlP = @"SELECT top 1 ITEMID, NAME,0 AS PurchLineNo FROM _V_ItemDesc
+                        WHERE ITEMID='" + ItemID.Replace("'", "''") + "'";
+
+                        DataTable dtP = db.QueryToDataTable(sqlP);
+
+                        if (dtP.Rows.Count > 0)
+                        {
+                            PurchLineNo = dtP.Rows[0]["PurchLineNo"].ToString();
+                            ItemName = dtP.Rows[0]["NAME"].ToString();
+                        }
+
+
                     }
 
                     string strsql = @"
                     INSERT INTO [AX-EXT].dbo.ISPC_ItemInspect
                     (
-                        PO, ItemID,ItemName,MemoID,QTYRecv,QTYGood,QTYScrap, GoodButOverPOQty,
+                        PO, ItemID,ItemName,MemoID,SupplierCode,QTYRecv,QTYGood,QTYScrap, GoodButOverPOQty,
                         NotInspecQty,MissingQty,OverQty,ReturnQty,Reason,PurchLineNo,
-                        ShelfNo,CreateDate,InspecType,IsActive
+                        ShelfNo,CreateDate,InspecType,Createby,IsActive
                     )
                     VALUES
                     (
@@ -432,6 +529,7 @@ namespace GJTH_ISPC
                         '" + ItemID + @"',
                         '" + ItemName + @"',
                         '" + Memo + @"',
+                        '" + SupplierCode + @"',
                         '" + QTYRecv + @"',
                         '" + QTYGood + @"',
                         '" + QTYScrap + @"',
@@ -445,6 +543,7 @@ namespace GJTH_ISPC
                         '0',
                         GETDATE(),
                         '1',
+                        '" + strUserId + @"',
                         '1'
                     )";
 
@@ -477,7 +576,27 @@ namespace GJTH_ISPC
             sb.Append("<script type='text/javascript'>");
 
             sb.Append("$('#textHeader').text('" + strHeader + "');");
-
+            
+            if (strHeader == "Warning")
+            {
+                sb.Append("$('#textHeader').css({'color':'#ff8c00','font-weight':'bold'});");
+            }
+            else if (strHeader == "Success")
+            {
+                sb.Append("$('#textHeader').css({'color':'#28a745','font-weight':'bold'});");
+            }
+            else if (strHeader == "Error")
+            {
+                sb.Append("$('#textHeader').css({'color':'#dc3545','font-weight':'bold'});");
+            }
+            else if (strHeader == "Delete")
+            {
+                sb.Append("$('#textHeader').css({'color':'#b02a37','font-weight':'bold'});");
+            }
+            else
+            {
+                sb.Append("$('#textHeader').css({'color':'#0dcaf0','font-weight':'normal'});");
+            }
             sb.Append("$('#mdTrnid').text('" + strDetail + "');");
 
             if (!string.IsNullOrEmpty(strButton))
@@ -537,11 +656,7 @@ namespace GJTH_ISPC
                         //------------------------------------------------
                         // ดึงข้อมูล ITEMID + NAME จาก _V_ItemDesc
                         //------------------------------------------------
-                        string sqlP = @"
-                            SELECT ITEMID,
-                               MAX(NAME) AS NAME
-                        FROM _V_ItemDesc
-                        GROUP BY ITEMID";
+                        string sqlP = @"SELECT ITEMID,MAX(NAME) AS NAME FROM _V_ItemDesc GROUP BY ITEMID";
 
                         DataTable dtPurch = db.QueryToDataTable(sqlP);
 
@@ -588,11 +703,11 @@ namespace GJTH_ISPC
                             totalQtyRecv += qtyRecv;
                         }
 
-                        // เพิ่มแถว Total
+                        // เพิ่มแถว Total QTY Recv
                         DataRow totalRow = dt.NewRow();
 
                         totalRow["ItemID"] = "Qty.To Receive";
-                        totalRow["QTYRecv"] = totalQtyRecv.ToString("N0");
+                        totalRow["QTYRecv"] = totalQtyRecv.ToString("N2");
 
                         dt.Rows.Add(totalRow);
 
@@ -626,24 +741,24 @@ namespace GJTH_ISPC
                 if (drv["ItemID"].ToString() == "Qty.To Receive")
                 {
                     e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#FFF2CC");
-                    
+
                     e.Row.Font.Bold = true;
                     e.Row.Cells[0].Font.Size = FontUnit.Point(11);
                     // Merge ตั้งแต่ No ถึง MemoID
                     e.Row.Cells[0].Text = "Qty.To Receive";
                     e.Row.Cells[0].HorizontalAlign = HorizontalAlign.Center;
                     e.Row.Cells[0].ForeColor = System.Drawing.Color.DarkBlue;
-                    e.Row.Cells[0].ColumnSpan = 5;
+                    e.Row.Cells[0].ColumnSpan = 6;
 
-                    for (int i = 1; i <= 4; i++)
+                    for (int i = 1; i <= 5; i++)
                     {
                         e.Row.Cells[i].Visible = false;
                     }
 
                     // QTYRecv สีแดง
-                    e.Row.Cells[5].ForeColor = System.Drawing.Color.Red;
-                    e.Row.Cells[5].Font.Bold = true;
-                    e.Row.Cells[5].HorizontalAlign = HorizontalAlign.Right;
+                    e.Row.Cells[6].ForeColor = System.Drawing.Color.Red;
+                    e.Row.Cells[6].Font.Bold = true;
+                    e.Row.Cells[6].HorizontalAlign = HorizontalAlign.Right;
                 }
             }
         }

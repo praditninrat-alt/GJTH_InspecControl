@@ -43,7 +43,7 @@ namespace GJTH_ISPC
 
             if (!ValidateTemplate())
             {
-                ShowModalDialog("Warning", "The uploaded file does not match the selected template.", "OK", true);
+                ShowModalDialog("Warning", "⚠ The uploaded file does not match the selected template.", "OK", false);
                 return;
             }
 
@@ -69,7 +69,26 @@ namespace GJTH_ISPC
             sb.Append("<script type='text/javascript'>");
 
             sb.Append("$('#textHeader').text('" + strHeader + "');");
-
+            if (strHeader == "Warning")
+            {
+                sb.Append("$('#textHeader').css({'color':'#ff8c00','font-weight':'bold'});");
+            }
+            else if (strHeader == "Success")
+            {
+                sb.Append("$('#textHeader').css({'color':'#28a745','font-weight':'bold'});");
+            }
+            else if (strHeader == "Error")
+            {
+                sb.Append("$('#textHeader').css({'color':'#dc3545','font-weight':'bold'});");
+            }
+            else if (strHeader == "Delete")
+            {
+                sb.Append("$('#textHeader').css({'color':'#b02a37','font-weight':'bold'});");
+            }
+            else
+            {
+                sb.Append("$('#textHeader').css({'color':'#0dcaf0','font-weight':'normal'});");
+            }
             sb.Append("$('#mdTrnid').text('" + strDetail + "');");
 
             if (!string.IsNullOrEmpty(strButton))
@@ -104,12 +123,12 @@ namespace GJTH_ISPC
                 
                 if (rdoDiamond.Checked)
                 {
-                    return totalColumn >= 23;
+                    return totalColumn >= 24;
                 }
 
                 if (rdoStone.Checked)
                 {
-                    return totalColumn <= 12;
+                    return totalColumn <= 13;
                 }
             }
 

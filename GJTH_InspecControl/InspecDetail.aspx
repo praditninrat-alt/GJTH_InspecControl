@@ -411,7 +411,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Delete </h4>
+                    <h4 class="modal-title" style="color:red;">Delete</h4>
                 </div>
                 <div class="text-center">
                     <asp:HiddenField ID="HdeleteId" runat="server" />

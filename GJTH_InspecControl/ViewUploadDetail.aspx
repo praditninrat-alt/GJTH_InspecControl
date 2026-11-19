@@ -154,7 +154,7 @@
             runat="server"
             AutoGenerateColumns="True"
             PageSize="20"
-             OnRowDataBound="grvData_RowDataBound">
+            OnRowDataBound="grvData_RowDataBound">
 
             <AlternatingRowStyle BackColor="White" />
 

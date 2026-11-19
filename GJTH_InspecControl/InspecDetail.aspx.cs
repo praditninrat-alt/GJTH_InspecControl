@@ -178,7 +178,7 @@ namespace GJTH_ISPC
                 txtPO.Enabled = false;
                 btnSearch.Enabled = false;
                 btnSave.Enabled = true;
-                
+
             }
             else
             {
@@ -247,7 +247,7 @@ namespace GJTH_ISPC
 
 
             strsql = @"SELECT 
-                        ROW_NUMBER() OVER(ORDER BY ins.PurchLineNo ) AS 'RowSeq',
+                        ROW_NUMBER() OVER(ORDER BY ins.RowID ) AS 'RowSeq',
                         ins.po as PURCHID,'' as PURCHNAME,'' as CUSTOMERREF,'' as PURCHASELINELINENUMBER,
                         ins.po as ORIGPURCHID,ins.ITEMID,vw.NAME,ins.QTYRecv AS'POQty'
                         ,ins.QTYRecv as 'RecQty',ins.QTYGood as 'GoodQty',ins.QTYScrap as 'ScrapQty','' as PURCHPRICE,'' as  Amt
@@ -261,7 +261,7 @@ namespace GJTH_ISPC
                         --INNER JOIN dbo.[PURCHTABLE] pt ON pl.PURCHID = pt.PURCHID
                     LEFT OUTER JOIN dbo.[_V_ItemDesc] vw ON vw.ITEMID = ins.ITEMID
                     where  ins.MemoID='" + txtInvData.Text + "'" + Environment.NewLine;
-            strsql += "ORDER BY ins.PurchLineNo ";
+            strsql += "ORDER BY ins.RowID ";
 
             DataTable dtData = db.QueryToDataTable(strsql);
 
@@ -321,7 +321,7 @@ namespace GJTH_ISPC
                 }
 
             }
-            
+
 
 
         }
@@ -492,6 +492,27 @@ namespace GJTH_ISPC
 
             sb.Append("$('#textHeader').text('" + strHeader + "');");
 
+            if (strHeader == "Warning")
+            {
+                sb.Append("$('#textHeader').css({'color':'#ff8c00','font-weight':'bold'});");
+            }
+            else if (strHeader == "Success")
+            {
+                sb.Append("$('#textHeader').css({'color':'#28a745','font-weight':'bold'});");
+            }
+            else if (strHeader == "Error")
+            {
+                sb.Append("$('#textHeader').css({'color':'#dc3545','font-weight':'bold'});");
+            }
+            else if (strHeader == "Delete")
+            {
+                sb.Append("$('#textHeader').css({'color':'#b02a37','font-weight':'bold'});");
+            }
+            else
+            {
+                sb.Append("$('#textHeader').css({'color':'#0dcaf0','font-weight':'normal'});");
+            }
+
             sb.Append("$('#mdTrnid').text('" + strDetail + "');");
 
             if (!string.IsNullOrEmpty(strButton))
@@ -628,6 +649,28 @@ namespace GJTH_ISPC
 
             sb.Append("$('#mdResHead').text('" + strHeader + "');");
 
+            if (strHeader == "Warning")
+            {
+                sb.Append("$('#textHeader').css({'color':'#ff8c00','font-weight':'bold'});");
+            }
+            else if (strHeader == "Success")
+            {
+                sb.Append("$('#textHeader').css({'color':'#28a745','font-weight':'bold'});");
+            }
+            else if (strHeader == "Error")
+            {
+                sb.Append("$('#textHeader').css({'color':'#dc3545','font-weight':'bold'});");
+            }
+            else if (strHeader == "Delete")
+            {
+                sb.Append("$('#textHeader').css({'color':'#b02a37','font-weight':'bold'});");
+            }
+            else
+            {
+                sb.Append("$('#textHeader').css({'color':'#0dcaf0','font-weight':'normal'});");
+            }
+
+
             sb.Append("$('#mdResDetail').text('" + strDetail + "');");
 
             sb.Append("$('#mdPopResponse').modal('show');");
@@ -727,9 +770,26 @@ namespace GJTH_ISPC
                         TextBox txtReturnQTY = (TextBox)GridView1.Rows[i].FindControl("txtReturnQTY");
                         decimal dReturnQTY = txtReturnQTY.Text == "" ? 0 : Convert.ToDecimal(txtReturnQTY.Text);
 
+                        string SupplierCode = "";
+
+                        if (!string.IsNullOrWhiteSpace(lblPO.Text))
+                        {
+                            string sqlP = @"SELECT TOP 1 ORDERACCOUNT
+                            FROM PURCHTABLE
+                            WHERE PURCHID='" + lblPO.Text.Replace("'", "''") + "'";
+
+                            DataTable dtP = db.QueryToDataTable(sqlP);
+
+                            if (dtP.Rows.Count > 0)
+                            {
+                                SupplierCode = dtP.Rows[0]["ORDERACCOUNT"].ToString();
+                            }
+                        }
+
+
                         string strsql = "Update ISPC_ItemInspect Set ";
                         strsql += " MemoID='" + txtInvData.Text + "',";
-
+                        strsql += " ItemName='" + lblItemName.Text.Replace("'", "''") + "',";
                         strsql += " NotInspecQty=" + dNotInspc + ",";
                         strsql += " GoodButOverPOQty=" + dGoodButOverPO + ",";
                         strsql += " YellowQty=" + dYellow + ",";
@@ -746,11 +806,13 @@ namespace GJTH_ISPC
                         strsql += " Remark='" + txtRemark.Text + "',";
                         strsql += " Reason='" + txtReason.Text + "',";
                         strsql += " ShelfNo='" + txtShelfNo.Text + "',";
-                        strsql += " ReturnQTY=" + dReturnQTY + ",";
+                        strsql += " ReturnQTY='" + dReturnQTY + "',";
                         /** เพิ่ม Field ModifyDate ที่ DataBase-- 01/10/2026 --**/
-                        strsql += " QTYRecv=" + dRec + ",";
-                        strsql += " QTYGood=" + dGood + ",";
-                        strsql += " QTYScrap=" + dScrap + ",";
+                        strsql += " QTYRecv='" + dRec + "',";
+                        strsql += " QTYGood='" + dGood + "',";
+                        strsql += " QTYScrap='" + dScrap + "',";
+                        //strsql += " Createby='" + strUserId + "',";
+                        strsql += " SupplierCode='" + SupplierCode + "',";
                         strsql += " ModifyDate='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "'";
                         strsql += " Where RowID=" + Convert.ToInt32(lblRowID.Text) + "";
 
@@ -771,6 +833,8 @@ namespace GJTH_ISPC
                         ShowModalDialog("Warning", "Memo/Invoice already exists.", "OK", true);
                         return;
                     }
+
+
 
                     for (int i = 0; i < GridView1.Rows.Count; i++)
                     {
@@ -828,13 +892,28 @@ namespace GJTH_ISPC
                         TextBox txtReturnQTY = (TextBox)GridView1.Rows[i].FindControl("txtReturnQTY");
                         decimal dReturnQTY = txtReturnQTY.Text == "" ? 0 : Convert.ToDecimal(txtReturnQTY.Text);
 
+                        string SupplierCode = "";
+
+                        if (!string.IsNullOrWhiteSpace(lblPO.Text))
+                        {
+                            string sqlP = @"SELECT TOP 1 ORDERACCOUNT
+                            FROM PURCHTABLE
+                            WHERE PURCHID='" + lblPO.Text.Replace("'", "''") + "'";
+
+                            DataTable dtP = db.QueryToDataTable(sqlP);
+
+                            if (dtP.Rows.Count > 0)
+                            {
+                                SupplierCode = dtP.Rows[0]["ORDERACCOUNT"].ToString();
+                            }
+                        }
 
                         string strsql = String.Format(@"Insert into ISPC_ItemInspect (PO,MemoID,ItemID,ItemName,NotInspecQty,GoodButOverPOQty,YellowQty,TooLightQty
-                                ,CrackQty,BadCutQty,TooBigQty,TooSmallQty,Zoning,Clearity,Other,OverQty,MissingQty,Remark,Reason,ShelfNo,CreateDate,PurchLineNo,InspecType,ReturnQTY,QTYRecv,QTYGood,QTYScrap,IsActive) 
-                                Values('{0}','{1}','{2}','{3}','{4}',{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},'{17}','{18}','{19}','{20}',{21},{22},{23},{24},{25},{26},1)"
+                                ,CrackQty,BadCutQty,TooBigQty,TooSmallQty,Zoning,Clearity,Other,OverQty,MissingQty,Remark,Reason,ShelfNo,CreateDate,PurchLineNo,InspecType,ReturnQTY,QTYRecv,QTYGood,QTYScrap,Createby,SupplierCode,IsActive) 
+                                Values('{0}','{1}','{2}','{3}','{4}',{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},'{17}','{18}','{19}','{20}',{21},{22},{23},{24},{25},{26},'{27}','{28}',1)"
                                 , lblPO.Text, txtInvData.Text, lblItemID.Text, lblItemName.Text.Replace("'", "''")
                                 , dNotInspc, dGoodButOverPO, dYellow, dLight, dCrack, dBadCut, dBig, dSmall, dZoning, dClearity, dOther, dOverQty, dMissingQty
-                               , txtRemark.Text, txtReason.Text, txtShelfNo.Text, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), iPurchLine, iInspecTyhpe, dReturnQTY, dRec, dGood, dScrap);
+                               , txtRemark.Text, txtReason.Text, txtShelfNo.Text, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), iPurchLine, iInspecTyhpe, dReturnQTY, dRec, dGood, dScrap, strUserId, SupplierCode);
                         db.ExecuteDBExt(strsql);
 
                     }

@@ -192,6 +192,27 @@ namespace GJTH_ISPC
 
             sb.Append("$('#textHeader').text('" + strHeader + "');");
 
+            if (strHeader == "Warning")
+            {
+                sb.Append("$('#textHeader').css({'color':'#ff8c00','font-weight':'bold'});");
+            }
+            else if (strHeader == "Success")
+            {
+                sb.Append("$('#textHeader').css({'color':'#28a745','font-weight':'bold'});");
+            }
+            else if (strHeader == "Error")
+            {
+                sb.Append("$('#textHeader').css({'color':'#dc3545','font-weight':'bold'});");
+            }
+            else if (strHeader == "Delete")
+            {
+                sb.Append("$('#textHeader').css({'color':'#b02a37','font-weight':'bold'});");
+            }
+            else
+            {
+                sb.Append("$('#textHeader').css({'color':'#0dcaf0','font-weight':'normal'});");
+            }
+
             sb.Append("$('#mdTrnid').text('" + strDetail + "');");
 
             if (!string.IsNullOrEmpty(strButton))
