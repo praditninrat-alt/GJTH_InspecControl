@@ -932,51 +932,114 @@ namespace GJTH_ISPC
             chkTypeChange();
         }
 
-        public void chkTypeChange()
+         public void chkTypeChange()
         {
             if (rdoDiamond.Checked)
             {
-                lblInvSearch.Visible = true;
-                txtInvSearch.Visible = true;
-                GridView1.Columns[9].Visible = true;
-                GridView1.Columns[10].Visible = true;
-                GridView1.Columns[11].Visible = true;
-                GridView1.Columns[12].Visible = true;
-                GridView1.Columns[13].Visible = true;
-                GridView1.Columns[14].Visible = true;
-                GridView1.Columns[15].Visible = true;
-                GridView1.Columns[16].Visible = true;
-                GridView1.Columns[17].Visible = true;
-                GridView1.Columns[18].Visible = true;
-                GridView1.Columns[19].Visible = true;
-                GridView1.Columns[20].Visible = true;
-                GridView1.Columns[21].Visible = true;
-                GridView1.Columns[22].Visible = true;
-                GridView1.Columns[23].Visible = false;
-                GridView1.Columns[26].Visible = true;
+                if (Session["Invoice"].ToString() == "")
+                {
+                    Label5.Visible = true;
+                    txtPO.Visible = true;
+                    lblInvSearch.Visible = true;
+                    txtInvSearch.Visible = true;
+                    GridView1.Columns[9].Visible = true;
+                    GridView1.Columns[10].Visible = true;
+                    GridView1.Columns[11].Visible = true;
+                    GridView1.Columns[12].Visible = true;
+                    GridView1.Columns[13].Visible = true;
+                    GridView1.Columns[14].Visible = true;
+                    GridView1.Columns[15].Visible = true;
+                    GridView1.Columns[16].Visible = true;
+                    GridView1.Columns[17].Visible = true;
+                    GridView1.Columns[18].Visible = true;
+                    GridView1.Columns[19].Visible = true;
+                    GridView1.Columns[20].Visible = true;
+                    GridView1.Columns[21].Visible = true;
+                    GridView1.Columns[22].Visible = true;
+                    GridView1.Columns[23].Visible = false;
+                    GridView1.Columns[26].Visible = true;
+                }
+                else
+                {
+                    // ซ่อน 
+                    Label5.Visible = false;
+                    txtPO.Visible = false;
+                    lblInvSearch.Visible = false;
+                    txtInvSearch.Visible = false;
+                    lblInvData.Visible = true;
+                    txtInvData.Visible = true;
 
+                    GridView1.Columns[9].Visible = true;
+                    GridView1.Columns[10].Visible = true;
+                    GridView1.Columns[11].Visible = true;
+                    GridView1.Columns[12].Visible = true;
+                    GridView1.Columns[13].Visible = true;
+                    GridView1.Columns[14].Visible = true;
+                    GridView1.Columns[15].Visible = true;
+                    GridView1.Columns[16].Visible = true;
+                    GridView1.Columns[17].Visible = true;
+                    GridView1.Columns[18].Visible = true;
+                    GridView1.Columns[19].Visible = true;
+                    GridView1.Columns[20].Visible = true;
+                    GridView1.Columns[21].Visible = true;
+                    GridView1.Columns[22].Visible = true;
+                    GridView1.Columns[23].Visible = false;
+                    GridView1.Columns[26].Visible = true;
+
+                }
             }
             else if (rdoStone.Checked)
             {
-                lblInvSearch.Visible = false;
-                txtInvSearch.Visible = false;
-                GridView1.Columns[9].Visible = true;
-                GridView1.Columns[10].Visible = true;
-                GridView1.Columns[11].Visible = false;
-                GridView1.Columns[12].Visible = false;
-                GridView1.Columns[13].Visible = false;
-                GridView1.Columns[14].Visible = false;
-                GridView1.Columns[15].Visible = false;
-                GridView1.Columns[16].Visible = false;
-                GridView1.Columns[17].Visible = false;
-                GridView1.Columns[18].Visible = false;
-                GridView1.Columns[19].Visible = false;
-                GridView1.Columns[20].Visible = false;
-                GridView1.Columns[21].Visible = true;
-                GridView1.Columns[22].Visible = true;
-                GridView1.Columns[23].Visible = true;
-                GridView1.Columns[26].Visible = true;
+                if (Session["Invoice"].ToString() == "")
+                {
+                    Label5.Visible = true;
+                    txtPO.Visible = true;
+                    lblInvSearch.Visible = true;
+                    txtInvSearch.Visible = true;
+                    GridView1.Columns[9].Visible = true;
+                    GridView1.Columns[10].Visible = true;
+                    GridView1.Columns[11].Visible = false;
+                    GridView1.Columns[12].Visible = false;
+                    GridView1.Columns[13].Visible = false;
+                    GridView1.Columns[14].Visible = false;
+                    GridView1.Columns[15].Visible = false;
+                    GridView1.Columns[16].Visible = false;
+                    GridView1.Columns[17].Visible = false;
+                    GridView1.Columns[18].Visible = false;
+                    GridView1.Columns[19].Visible = false;
+                    GridView1.Columns[20].Visible = false;
+                    GridView1.Columns[21].Visible = true;
+                    GridView1.Columns[22].Visible = true;
+                    GridView1.Columns[23].Visible = true;
+                    GridView1.Columns[26].Visible = true;
+                }
+                else
+                {
+                    // ซ่อน 
+                    Label5.Visible = false;
+                    txtPO.Visible = false;
+                    lblInvSearch.Visible = false;
+                    txtInvSearch.Visible = false;
+                    lblInvData.Visible = true;
+                    txtInvData.Visible = true;
 
+                    GridView1.Columns[9].Visible = true;
+                    GridView1.Columns[10].Visible = true;
+                    GridView1.Columns[11].Visible = false;
+                    GridView1.Columns[12].Visible = false;
+                    GridView1.Columns[13].Visible = false;
+                    GridView1.Columns[14].Visible = false;
+                    GridView1.Columns[15].Visible = false;
+                    GridView1.Columns[16].Visible = false;
+                    GridView1.Columns[17].Visible = false;
+                    GridView1.Columns[18].Visible = false;
+                    GridView1.Columns[19].Visible = false;
+                    GridView1.Columns[20].Visible = false;
+                    GridView1.Columns[21].Visible = true;
+                    GridView1.Columns[22].Visible = true;
+                    GridView1.Columns[23].Visible = true;
+                    GridView1.Columns[26].Visible = true;
+                }
             }
 
             /** ปิด เอาไว้เพราะว่าไม่ได้ใช้งาน 01/10/2026 ***/
