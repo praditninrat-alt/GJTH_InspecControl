@@ -292,6 +292,7 @@ namespace GJTH_ISPC
                     {
                         case 0:
                             rdoDiamond.Checked = true;
+                            rdoDiamond.ForeColor = System.Drawing.Color.Red;
                             rdoStone.Checked = false;
                             //rdoSheetTube.Checked = false;
                             lblInvData.Visible = false;
@@ -301,6 +302,7 @@ namespace GJTH_ISPC
                             break;
                         case 1:
                             rdoStone.Checked = true;
+                            rdoStone.ForeColor = System.Drawing.Color.Red;
                             rdoDiamond.Checked = false;
                             //rdoSheetTube.Checked = false;
                             lblInvData.Visible = true;

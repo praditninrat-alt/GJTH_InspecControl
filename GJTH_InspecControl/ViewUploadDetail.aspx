@@ -309,11 +309,8 @@
                 </div>
 
                 <div class="modal-footer">
-
-                    <button id="btnCancel" class="btn btn-danger" data-dismiss="modal">No</button>
-
                     <asp:Button ID="btnConfirm" CssClass="btn btn-success" runat="server" Text="Yes" />
-
+                    <button id="btnCancel" class="btn btn-danger" data-dismiss="modal">No</button>
                 </div>
 
             </div>
@@ -336,10 +333,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button id="btnCancel2" class="btn btn-danger" data-dismiss="modal">OK</button>
                     <button id="btnSuccess" class="btn btn-success" data-dismiss="modal">OK</button>
-
-
+                    <button id="btnCancel2" class="btn btn-danger" data-dismiss="modal">OK</button>
                 </div>
             </div>
         </div>

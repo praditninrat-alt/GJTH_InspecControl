@@ -139,8 +139,8 @@
                     <span id="mdTrnid" style="font-size:18px;"></span>
                 </div>
                 <div class="modal-footer">
+                     <button id="btnSuccess" type="button" class="btn btn-success" data-dismiss="modal">OK</button>
                     <button id="btnCancel" type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
-                    <button id="btnSuccess" type="button" class="btn btn-success" data-dismiss="modal">OK</button>
                 </div>
             </div>
         </div>

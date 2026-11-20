@@ -396,10 +396,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button id="btnCancel" class="btn btn-danger" data-dismiss="modal">OK</button>
                     <button id="btnSuccess" class="btn btn-success" data-dismiss="modal">OK</button>
-
-
+                    <button id="btnCancel" class="btn btn-danger" data-dismiss="modal">OK</button>
                 </div>
             </div>
         </div>
@@ -420,8 +418,9 @@
                     Do You Want To Delete Job ItemID : <span id="deletransferid" />
                 </div>
                 <div class="modal-footer">
-                    <button id="btncanceldelete" class="btn btn-danger" data-dismiss="modal" CausesValidation="False" UseSubmitBehavior="False">No</button>
                     <asp:Button ID="btndelete" CssClass="btn btn-success" OnClick="btndelete_Click" runat="server" Text="Yes" CausesValidation="False" UseSubmitBehavior="False" />
+                    <button id="btncanceldelete" class="btn btn-danger" data-dismiss="modal" CausesValidation="False" UseSubmitBehavior="False">No</button>
+                
                 </div>
             </div>
         </div>

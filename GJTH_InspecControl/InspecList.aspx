@@ -259,10 +259,8 @@
 
                 </div>
                 <div class="modal-footer">
+                     <button id="btnSuccess" class="btn btn-success" data-dismiss="modal">OK</button>
                     <button id="btnCancel" class="btn btn-danger" data-dismiss="modal">OK</button>
-                    <button id="btnSuccess" class="btn btn-success" data-dismiss="modal">OK</button>
-
-
                 </div>
             </div>
         </div>
@@ -281,8 +279,8 @@
                     Do You Want To Delete Job Invoice : <span id="deletransferid" />
                 </div>
                 <div class="modal-footer">
+                     <asp:Button ID="btndelete" CssClass="btn btn-success" OnClick="btndelete_Click" runat="server" Text="Yes" />
                     <button id="btncanceldelete" class="btn btn-danger" data-dismiss="modal">No</button>
-                    <asp:Button ID="btndelete" CssClass="btn btn-success" OnClick="btndelete_Click" runat="server" Text="Yes" />
                 </div>
             </div>
         </div>
