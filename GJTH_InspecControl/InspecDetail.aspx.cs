@@ -131,11 +131,11 @@ namespace GJTH_ISPC
             //where 1=1";
 
             string strsql = @"select ROW_NUMBER() OVER(ORDER BY pl.LINENUMBER ASC) AS RowSeq,pt.PURCHID,pt.PURCHNAME,pl.CUSTOMERREF,pl.LINENUMBER PURCHASELINELINENUMBER,pl.PURCHID ORIGPURCHID
-                        ,pl.ITEMID,vw.NAME,pl.PURCHQTY 'POQty',pl.PURCHQTY 'RecQty'
+                        ,pl.ITEMID,vw.NAME,pl.PURCHQTY 'POQty',pl.REMAINPURCHPHYSICAL 'RecQty'
                         ,0 'GoodQty',0 'ScrapQty'
                         ,pl.PURCHPRICE,pl.LINEAMOUNT Amt
-                                            ,NotInspecQty,GoodButOverPOQty,YellowQty,TooLightQty,CrackQty,BadCutQty,TooBigQty,TooSmallQty,Zoning,Clearity,Other,Remark,Reason
-                                            ,ins.MissingQty,ins.OverQty,ins.RowID,ins.po,ins.MemoID,ins.ShelfNo ,ins.InspecType,ins.ReturnQTY
+                        ,NotInspecQty,GoodButOverPOQty,YellowQty,TooLightQty,CrackQty,BadCutQty,TooBigQty,TooSmallQty,Zoning,Clearity,Other,Remark,Reason
+                        ,ins.MissingQty,ins.OverQty,ins.RowID,ins.po,ins.MemoID,ins.ShelfNo ,ins.InspecType,ins.ReturnQTY
                         from PURCHTABLE pt
                         left outer join Purchline pl on pt.purchID = pl.purchid
                         left outer join [AX-EXT].dbo.ISPC_ItemInspect ins on ins.ItemID = pl.ITEMID and ins.po = pt.PURCHID and ins.MemoID = pl.CUSTOMERREF and ins.PurchLineNo = pl.LINENUMBER
